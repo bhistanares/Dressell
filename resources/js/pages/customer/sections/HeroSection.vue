@@ -1,7 +1,7 @@
 <template>
     <!-- Hero Section: Kategori dress langsung di atas fold -->
     <section class="bg-white pt-5 pb-2" id="beranda">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
 
             <!-- Intro singkat (compact, tidak mendominasi) -->
             <div class="flex items-center justify-between mb-4">

@@ -1,7 +1,7 @@
 <template>
     <!-- Collection Section -->
     <section class="py-10 bg-white" id="koleksi">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
 
             <!-- Section Header -->
             <div class="flex items-center justify-between mb-6">

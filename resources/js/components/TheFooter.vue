@@ -1,7 +1,7 @@
 <template>
     <footer class="bg-gray-900 text-gray-300">
         <!-- Main Footer -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12 lg:py-16">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
                 <!-- Brand Column -->
                 <div class="col-span-2 md:col-span-1">
@@ -68,7 +68,7 @@
 
         <!-- Bottom Bar -->
         <div class="border-t border-gray-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-5">
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                     <p class="text-gray-500 text-xs">
                         © 2025 Dressell. Hak cipta dilindungi.

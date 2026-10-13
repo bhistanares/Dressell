@@ -2,7 +2,7 @@
     <!-- Promo Banner Section -->
     <!-- id="promo" untuk anchor navigasi dari navbar -->
     <section class="py-10 bg-white" id="promo">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
             <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-rose-800 to-rose-600 min-h-[260px]">
                 <!-- Background decorative elements -->
                 <div class="absolute inset-0 overflow-hidden">
