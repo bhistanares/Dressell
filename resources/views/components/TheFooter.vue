@@ -100,3 +100,38 @@
         </div>
     </footer>
 </template>
+
+<script setup>
+const socials = [
+    { name: 'Instagram', icon: '📸' },
+    { name: 'TikTok', icon: '🎵' },
+    { name: 'WhatsApp', icon: '💬' },
+    { name: 'YouTube', icon: '▶️' },
+];
+
+const companyLinks = [
+    'Tentang Kami',
+    'Karir',
+    'Blog & Inspirasi',
+    'Press Kit',
+    'Partner & Afiliasi',
+];
+
+const helpLinks = [
+    'Pusat Bantuan',
+    'Cara Menyewa',
+    'Kebijakan Pengembalian',
+    'Syarat & Ketentuan',
+    'Kebijakan Privasi',
+];
+
+const infoLinks = [
+    'Akun Saya',
+    'Status Pesanan',
+    'Fitting Appointment',
+    'Ulasan & Rating',
+    'Program Loyalitas',
+];
+
+const paymentMethods = ['Visa', 'Mastercard', 'GoPay', 'OVO', 'Dana', 'BCA'];
+</script>
