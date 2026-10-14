@@ -1,0 +1,19 @@
+/* ==========================================================================
+   Homepage Stylesheet (public/assets/css/homepage.css)
+   Digunakan untuk styling section homepage Dressell (Collection, Hero, dll.)
+   ========================================================================== */
+
+/* Multi-line clamp utility untuk teks judul atau deskripsi card */
+.line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}

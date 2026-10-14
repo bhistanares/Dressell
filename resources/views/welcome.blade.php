@@ -4,9 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Dressell – Sewa Dress Premium untuk Setiap Momen</title>
+        <title>Dressell – Sewa Dress</title>
 
         @fonts
+
+        <!-- Static Stylesheets -->
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
         <!-- Styles / Scripts -->
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))

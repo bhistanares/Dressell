@@ -1,104 +1,127 @@
 <template>
     <!-- Collection Section -->
-    <section class="py-10 bg-white" id="koleksi">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+    <section class="collection-section" id="koleksi">
+        <div class="collection-container">
 
             <!-- Section Header -->
-            <div class="flex items-center justify-between mb-6">
+            <div class="collection-header">
                 <div>
-                    <p class="text-rose-500 text-xs font-semibold uppercase tracking-wider mb-1">Pilihan Terbaik</p>
-                    <h2 class="text-xl font-bold text-gray-900">Koleksi Dress Terpopuler</h2>
+                    <p class="collection-eyebrow">Pilihan Terbaik</p>
+                    <h2 class="collection-title">Koleksi Dress Terpopuler</h2>
                 </div>
-                <a href="#" class="flex items-center gap-1 text-sm font-medium text-rose-600 hover:text-rose-700 transition-colors">
+
+                <a href="#" class="collection-all-link">
                     Lihat Semua
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="collection-link-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                     </svg>
                 </a>
             </div>
 
             <!-- Products Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-4">
-                <div v-for="product in products" :key="product.id"
-                     class="group bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all duration-200">
-
+            <div class="collection-grid">
+                <div
+                    v-for="product in products"
+                    :key="product.id"
+                    class="collection-card"
+                >
                     <!-- Image Container -->
-                    <div class="relative overflow-hidden aspect-[3/4]">
+                    <div class="collection-image-wrapper">
                         <img
                             :src="product.image"
                             :alt="product.name"
-                            class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-400"
+                            class="collection-image"
                         />
 
-                        <!-- Badge (kiri atas) -->
-                        <div v-if="product.badge" class="absolute top-2.5 left-2.5">
-                            <span :class="[
-                                'text-xs font-semibold px-2 py-1 rounded-full',
-                                product.badge === 'Terlaris' ? 'bg-rose-500 text-white' : 'bg-amber-400 text-white'
-                            ]">{{ product.badge }}</span>
+                        <!-- Badge -->
+                        <div v-if="product.badge" class="collection-badge-wrapper">
+                            <span
+                                :class="[
+                                    'collection-badge',
+                                    product.badge === 'Terlaris'
+                                        ? 'collection-badge-bestseller'
+                                        : 'collection-badge-favorite'
+                                ]"
+                            >
+                                {{ product.badge }}
+                            </span>
                         </div>
 
-                        <!-- Ketersediaan (kiri bawah) -->
-                        <div class="absolute bottom-2.5 left-2.5">
-                            <span :class="[
-                                'text-xs font-medium px-2 py-0.5 rounded-full',
-                                product.available
-                                    ? 'bg-white/90 text-green-700'
-                                    : 'bg-white/90 text-gray-400'
-                            ]">
+                        <!-- Availability -->
+                        <div class="collection-availability-wrapper">
+                            <span
+                                :class="[
+                                    'collection-availability',
+                                    product.available
+                                        ? 'collection-availability-available'
+                                        : 'collection-availability-unavailable'
+                                ]"
+                            >
                                 {{ product.available ? '✓ Tersedia' : 'Tidak Tersedia' }}
                             </span>
                         </div>
 
-                        <!-- Wishlist (kanan bawah — sesuai permintaan) -->
-                        <button class="absolute bottom-2.5 right-2.5 w-8 h-8 bg-white/85 rounded-full flex items-center justify-center hover:bg-white hover:text-rose-500 transition-all shadow-sm backdrop-blur-sm"
-                                aria-label="Tambah ke wishlist">
-                            <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <!-- Wishlist -->
+                        <button
+                            class="collection-wishlist"
+                            aria-label="Tambah ke wishlist"
+                        >
+                            <svg class="collection-wishlist-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                             </svg>
                         </button>
                     </div>
 
-                    <!-- Info Produk -->
-                    <div class="p-3">
-                        <!-- Kode model & kategori -->
-                        <div class="flex items-center justify-between mb-1">
-                            <span class="text-xs text-gray-400 font-mono">{{ product.modelCode }}</span>
-                            <span class="text-xs text-gray-400">{{ product.category }}</span>
+                    <!-- Product Information -->
+                    <div class="collection-product-info">
+
+                        <!-- Model Code & Category -->
+                        <div class="collection-product-meta">
+                            <span class="collection-model-code">{{ product.modelCode }}</span>
+                            <span class="collection-category">{{ product.category }}</span>
                         </div>
 
-                        <!-- Nama dress -->
-                        <h3 class="text-sm font-semibold text-gray-800 mb-1.5 line-clamp-1">{{ product.name }}</h3>
+                        <!-- Dress Name -->
+                        <h3 class="collection-product-name">{{ product.name }}</h3>
 
-                        <!-- Ukuran tersedia -->
-                        <div class="flex items-center gap-1 mb-2.5">
-                            <span class="text-xs text-gray-400 mr-0.5">Ukuran:</span>
-                            <span v-for="size in product.sizes" :key="size"
-                                  class="text-xs border border-gray-200 text-gray-600 px-1.5 py-0.5 rounded">
+                        <!-- Available Sizes -->
+                        <div class="collection-sizes">
+                            <span class="collection-size-label">Ukuran:</span>
+
+                            <span
+                                v-for="size in product.sizes"
+                                :key="size"
+                                class="collection-size"
+                            >
                                 {{ size }}
                             </span>
                         </div>
 
-                        <!-- Harga & Tombol Sewa -->
-                        <div class="flex items-center justify-between">
+                        <!-- Price & Rental Button -->
+                        <div class="collection-product-footer">
                             <div>
-                                <p class="text-sm font-bold text-rose-600">Rp {{ formatPrice(product.pricePerDay) }}</p>
-                                <p class="text-xs text-gray-400">per hari</p>
+                                <p class="collection-price">
+                                    Rp {{ formatPrice(product.pricePerDay) }}
+                                </p>
+                                <p class="collection-price-period">per hari</p>
                             </div>
+
                             <button
                                 :disabled="!product.available"
                                 :class="[
-                                    'text-xs font-semibold px-3 py-1.5 rounded-full transition-all duration-200',
+                                    'collection-rent-button',
                                     product.available
-                                        ? 'bg-rose-50 hover:bg-rose-500 text-rose-600 hover:text-white'
-                                        : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                                ]">
+                                        ? 'collection-rent-available'
+                                        : 'collection-rent-unavailable'
+                                ]"
+                            >
                                 Sewa
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 </template>
@@ -202,12 +225,3 @@ const products = [
     },
 ];
 </script>
-
-<style scoped>
-.line-clamp-1 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-}
-</style>
