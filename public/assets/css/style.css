@@ -20,8 +20,16 @@
 .navbar-main {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 4rem;
     gap: 1rem;
+}
+
+.navbar-secondary {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0.75rem;
 }
 
 
@@ -299,6 +307,10 @@
         padding: 0 3rem;
     }
 
+    .navbar-secondary {
+        display: flex;
+    }
+
     .navbar-navigation {
         display: flex;
     }
@@ -308,7 +320,7 @@
     }
 
     .navbar-search-input {
-        width: 14rem;
+        width: 22rem;
     }
 }
 

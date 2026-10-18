@@ -1,6 +1,7 @@
 <template>
     <header class="navbar">
         <div class="navbar-container">
+            <!-- Baris Pertama: Logo, Search, Aksi -->
             <div class="navbar-main">
 
                 <!-- Logo -->
@@ -8,24 +9,6 @@
                     <span class="navbar-logo-icon">🌸</span>
                     <span class="navbar-logo-text">Dressell</span>
                 </a>
-
-                <!-- Navigasi desktop -->
-                <nav class="navbar-navigation">
-                    <a
-                        v-for="item in navItems"
-                        :key="item.label"
-                        :href="item.href"
-                        :class="[
-                            'navbar-link',
-                            { active: item.active }
-                        ]"
-                    >
-                        {{ item.label }}
-                    </a>
-                </nav>
-
-                <!-- Spacer tablet -->
-                <div class="navbar-spacer"></div>
 
                 <!-- Search desktop dan tablet -->
                 <div class="navbar-search-desktop">
@@ -159,6 +142,23 @@
                     </button>
 
                 </div>
+            </div>
+
+            <!-- Baris Kedua: Navigasi Desktop -->
+            <div class="navbar-secondary">
+                <nav class="navbar-navigation">
+                    <a
+                        v-for="item in navItems"
+                        :key="item.label"
+                        :href="item.href"
+                        :class="[
+                            'navbar-link',
+                            { active: item.active }
+                        ]"
+                    >
+                        {{ item.label }}
+                    </a>
+                </nav>
             </div>
         </div>
 
