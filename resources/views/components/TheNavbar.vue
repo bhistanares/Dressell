@@ -65,11 +65,12 @@
                         </svg>
                     </button>
 
-                    <!-- Keranjang -->
+                    <!-- Bandingkan / Dress Ditahan -->
                     <button
                         type="button"
                         class="navbar-action-button"
-                        aria-label="Keranjang"
+                        aria-label="Bandingkan Dress"
+                        title="Bandingkan Dress"
                     >
                         <svg
                             class="navbar-action-icon"
@@ -81,7 +82,13 @@
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                                 stroke-width="1.5"
-                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                                d="M14 6a2 2 0 10-4 0c0 1.66 1.34 2.5 2 3.5l8 6.5H4l8-6.5"
+                            />
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M3 18a1 1 0 001 1h16a1 1 0 001-1"
                             />
                         </svg>
 
@@ -249,11 +256,17 @@
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                                 stroke-width="1.5"
-                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                                d="M14 6a2 2 0 10-4 0c0 1.66 1.34 2.5 2 3.5l8 6.5H4l8-6.5"
+                            />
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M3 18a1 1 0 001 1h16a1 1 0 001-1"
                             />
                         </svg>
 
-                        Keranjang
+                        Bandingkan Dress
                     </button>
 
                     <button
@@ -290,9 +303,7 @@ const mobileMenuOpen = ref(false);
 
 const navItems = [
     { label: 'Beranda', href: '/', active: true },
-    { label: 'Koleksi', href: '#koleksi', active: false },
-    { label: 'Kategori', href: '#kategori', active: false },
-    { label: 'Promo', href: '#promo', active: false },
+    { label: 'Katalog', href: '/katalog', active: false },
     { label: 'Fitting Appointment', href: '#fitting', active: false },
     { label: 'Cara Menyewa', href: '#cara-menyewa', active: false },
 ];
