@@ -12,15 +12,16 @@
 
                 <!-- Search desktop dan tablet -->
                 <div class="navbar-search-desktop">
-                    <div class="navbar-search">
+                    <form @submit.prevent="handleSearch" class="navbar-search">
                         <input
+                            v-model="searchQuery"
                             type="text"
                             placeholder="Cari dress..."
                             class="navbar-search-input"
                         />
 
                         <button
-                            type="button"
+                            type="submit"
                             class="navbar-search-button"
                             aria-label="Cari"
                         >
@@ -38,7 +39,7 @@
                                 />
                             </svg>
                         </button>
-                    </div>
+                    </form>
                 </div>
 
                 <!-- Ikon aksi -->
@@ -178,32 +179,35 @@
 
                 <!-- Search mobile -->
                 <div class="navbar-search navbar-mobile-search">
-                    <input
-                        type="text"
-                        placeholder="Cari dress..."
-                        class="navbar-search-input"
-                        style="width: 100%;"
-                    />
+                    <form @submit.prevent="handleSearch" style="display: flex; width: 100%; align-items: center;">
+                        <input
+                            v-model="searchQuery"
+                            type="text"
+                            placeholder="Cari dress..."
+                            class="navbar-search-input"
+                            style="width: 100%;"
+                        />
 
-                    <button
-                        type="button"
-                        class="navbar-search-button"
-                        aria-label="Cari"
-                    >
-                        <svg
-                            class="navbar-search-icon"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
+                        <button
+                            type="submit"
+                            class="navbar-search-button"
+                            aria-label="Cari"
                         >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                            />
-                        </svg>
-                    </button>
+                            <svg
+                                class="navbar-search-icon"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                />
+                            </svg>
+                        </button>
+                    </form>
                 </div>
 
                 <!-- Navigasi mobile -->
@@ -300,6 +304,16 @@
 import { ref } from 'vue';
 
 const mobileMenuOpen = ref(false);
+const searchQuery = ref('');
+
+const handleSearch = () => {
+    const q = searchQuery.value.trim();
+    if (q) {
+        window.location.href = `/katalog?search=${encodeURIComponent(q)}`;
+    } else {
+        window.location.href = '/katalog';
+    }
+};
 
 const navItems = [
     { label: 'Beranda', href: '/', active: true },
