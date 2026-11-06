@@ -1,0 +1,20 @@
+@import 'tailwindcss';
+
+@source '../views/admin/**/*.vue';
+@source '../views/admin/**/*.blade.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Cormorant Garamond', 'Cormorant', Garamond, 'Times New Roman', serif;
+
+    --color-ivory: #F4EFE6;
+    --color-paper: #FBF8F2;
+    --color-beige: #E4D8C6;
+    --color-sand: #D9CAB4;
+    --color-taupe: #8A7B6C;
+    --color-taupe-ink: #6B5F53;
+    --color-charcoal: #26221F;
+    --color-champagne: #C2A878;
+    --color-blush: #F7EFEF;
+    --color-blush-rose: #D48B96;
+}

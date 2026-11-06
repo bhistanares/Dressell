@@ -75,6 +75,16 @@
                 flex-direction: column;
                 justify-content: space-between;
             }
+
+            /* Pergeseran komposisi gambar, teks display & form ke kiri agar sisi kiri tidak terlalu kosong */
+            .display {
+                left: calc(50% - clamp(30px, 3vw, 60px) - clamp(38px, 4.2vw, 76px));
+            }
+
+            .plate,
+            .panel {
+                transform: translateX(calc(-1 * clamp(38px, 4.2vw, 76px)));
+            }
         }
 
         @media (max-width: 1023px) {
@@ -188,7 +198,7 @@
         .plate {
             position: relative;
             z-index: 2;
-            height: clamp(380px, 62vh, 580px);
+            height: clamp(400px, 66vh, 630px);
             aspect-ratio: 1920 / 2561;
             margin: 0;
             flex-shrink: 0;
@@ -269,12 +279,12 @@
         .panel {
             position: relative;
             z-index: 3;
-            width: clamp(440px, 34vw, 530px);
-            margin: 0 0 0 clamp(-85px, -6vw, -55px);
+            width: clamp(465px, 35.5vw, 565px);
+            margin: 0 0 0 clamp(-90px, -6.5vw, -60px);
             flex-shrink: 0;
             background: var(--paper);
             border-top: 2px solid var(--charcoal);
-            padding: clamp(24px, 3.2vh, 44px) clamp(28px, 3vw, 48px) clamp(22px, 2.8vh, 38px);
+            padding: clamp(28px, 3.6vh, 46px) clamp(32px, 3.2vw, 50px) clamp(24px, 3.2vh, 40px);
             box-shadow:
                 0 1px 0 rgba(38, 34, 31, 0.04),
                 0 40px 80px -42px rgba(38, 34, 31, 0.38);
