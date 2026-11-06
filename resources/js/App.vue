@@ -10,7 +10,7 @@
 
 <script setup>
 import TheNavbar from '../views/components/TheNavbar.vue';
-import Homepage from '../views/pages/customer/Homepage.vue';
+import Homepage from '../views/customer/Homepage.vue';
 import TheFooter from '../views/components/TheFooter.vue';
 
 // Catatan: FeaturesSection, HowToSection, NewsletterSection disimpan di components/
