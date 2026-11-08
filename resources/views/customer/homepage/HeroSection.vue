@@ -2,11 +2,12 @@
     <section class="hero-section" id="beranda">
         <div class="hero-container">
 
-            <!-- Intro -->
+            <!-- Intro Header Section -->
             <div class="hero-intro">
                 <div>
+                    <span class="hero-eyebrow">Atelier Collection</span>
                     <h1 class="hero-title">
-                        Temukan Dress untuk Setiap Momen
+                        Temukan Dress untuk <em>Setiap Momen</em>
                     </h1>
 
                     <p class="hero-subtitle">
@@ -14,9 +15,8 @@
                     </p>
                 </div>
 
-                <a href="#koleksi" class="hero-collection-link">
-                    Lihat Semua Koleksi
-
+                <a href="/katalog" class="hero-collection-link">
+                    <span>Lihat Semua Koleksi</span>
                     <svg
                         class="hero-link-icon"
                         fill="none"
@@ -33,18 +33,19 @@
                 </a>
             </div>
 
-            <!-- Grid Kategori -->
+            <!-- Grid Kategori Dress -->
             <div class="hero-category-grid">
                 <a
                     v-for="cat in heroCategories"
                     :key="cat.id"
-                    href="#koleksi"
+                    :href="'/katalog?kategori=' + encodeURIComponent(cat.name)"
                     class="hero-category-card"
                 >
                     <img
                         :src="cat.image"
                         :alt="cat.name"
                         class="hero-category-image"
+                        loading="lazy"
                     />
 
                     <div class="hero-category-overlay"></div>
@@ -65,7 +66,7 @@
 
             <!-- Link Mobile -->
             <div class="hero-mobile-link-wrapper">
-                <a href="#koleksi" class="hero-mobile-link">
+                <a href="/katalog" class="hero-mobile-link">
                     Lihat semua koleksi →
                 </a>
             </div>
@@ -75,31 +76,31 @@
 </template>
 
 <script setup>
-// Data dummy kategori untuk hero — akan terhubung ke database
+// Kategori gaun unggulan Dressell dengan aset foto studio nyata
 const heroCategories = [
     {
         id: 1,
         name: 'Dress Pesta',
         count: 48,
-        image: 'https://picsum.photos/seed/cat-pesta/400/533',
+        image: '/assets/img/dressell/drs-001.jpg',
     },
     {
         id: 2,
         name: 'Kebaya Modern',
         count: 35,
-        image: 'https://picsum.photos/seed/cat-kebaya/400/533',
+        image: '/assets/img/dressell/kby-012.jpg',
     },
     {
         id: 3,
         name: 'Gaun Pernikahan',
         count: 27,
-        image: 'https://picsum.photos/seed/cat-wedding/400/533',
+        image: '/assets/img/dressell/gwn-003.jpg',
     },
     {
         id: 4,
         name: 'Dress Formal',
         count: 56,
-        image: 'https://picsum.photos/seed/cat-formal/400/533',
+        image: '/assets/img/dressell/frm-009.jpg',
     },
 ];
 </script>

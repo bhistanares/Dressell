@@ -6,6 +6,12 @@
 
         <title>Dressell – Sewa Dress</title>
 
+        <link rel="icon" type="image/png" href="{{ asset('assets/img/logo-dressell.png') }}">
+
+        {{-- Tipografi Editorial: Cormorant Garamond (Serif) + Instrument Sans (Sans) --}}
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link rel="stylesheet" href="https://fonts.bunny.net/css?family=cormorant-garamond:400,500,500i,600,600i|instrument-sans:400,500,600,700&display=swap">
+
         @fonts
 
         <!-- Static Stylesheets -->

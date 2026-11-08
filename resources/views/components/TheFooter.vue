@@ -6,8 +6,12 @@
 
                 <!-- Brand Column -->
                 <div class="footer-brand">
-                    <a href="/" class="footer-logo">
-                        <span class="footer-logo-icon">🌸</span>
+                    <a href="/" class="footer-logo" aria-label="Dressell Beranda">
+                        <img
+                            :src="'/assets/img/logo-dressell.png'"
+                            alt="Dressell Logo"
+                            class="footer-logo-img"
+                        />
                         <span class="footer-logo-text">Dressell</span>
                     </a>
 
@@ -49,7 +53,7 @@
                     </ul>
                 </div>
 
-                <!-- Information Links -->
+                <!-- Information & Contact Links -->
                 <div class="footer-column">
                     <h3 class="footer-heading">Informasi</h3>
                     <ul class="footer-link-list">
