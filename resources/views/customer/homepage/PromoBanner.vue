@@ -53,12 +53,12 @@
 
                     </div>
 
-                    <!-- Right: Atelier Visual Presentation -->
+                    <!-- Right: Visual Presentation -->
                     <div class="promo-image-area">
 
                         <img
                             :src="'/assets/img/dressell/hero-atelier.jpg'"
-                            alt="Atelier Dressell Promo"
+                            alt="Dressell Promo"
                             class="promo-image"
                             loading="lazy"
                         />

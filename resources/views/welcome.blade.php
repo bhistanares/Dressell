@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Dressell – Sewa Dress</title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <link rel="icon" type="image/png" href="{{ asset('assets/img/logo-dressell.png') }}">
 
@@ -26,7 +27,20 @@
             </style>
         @endif
     </head>
+    @php
+        $currentUser = Auth::guard('web')->user();
+        $userPayload = $currentUser ? [
+            'name' => $currentUser->name,
+            'email' => $currentUser->email,
+        ] : null;
+    @endphp
     <body class="bg-white text-gray-900 min-h-screen antialiased">
-        <div id="app"></div>
+        <div
+            id="app"
+            data-user="{{ json_encode($userPayload) }}"
+            data-page="home"
+            data-logout-url="{{ route('logout') }}"
+            data-csrf="{{ csrf_token() }}"
+        ></div>
     </body>
 </html>

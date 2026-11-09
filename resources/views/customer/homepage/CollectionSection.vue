@@ -48,22 +48,9 @@
                             </span>
                         </div>
 
-                        <!-- Badge Ketersediaan (Bottom Left) -->
-                        <div class="collection-availability-wrapper">
-                            <span
-                                :class="[
-                                    'collection-availability',
-                                    product.available
-                                        ? 'collection-availability-available'
-                                        : 'collection-availability-unavailable'
-                                ]"
-                            >
-                                {{ product.available ? '✓ Tersedia' : 'Tidak Tersedia' }}
-                            </span>
-                        </div>
-
-                        <!-- Wishlist Button (Top Right — Mengikuti Pendekatan Visual Catalog) -->
+                        <!-- Wishlist Button (Hanya Ditampilkan Saat Hover untuk Customer Login) -->
                         <button
+                            v-if="isCustomer"
                             type="button"
                             :class="[
                                 'catalog-wishlist-btn',
@@ -71,14 +58,14 @@
                             ]"
                             :aria-label="'Simpan ' + product.name + ' ke favorit'"
                             :title="isWishlisted(product.id) ? 'Hapus dari favorit' : 'Tambah ke favorit'"
-                            @click="toggleWishlist(product.id)"
+                            @click.stop="toggleWishlist(product.id)"
                         >
                             <svg class="collection-wishlist-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                             </svg>
                         </button>
 
-                        <!-- Quick View Overlay (Slide-Up dari Bawah — Mengikuti Pendekatan Visual Catalog) -->
+                        <!-- Quick View Overlay (Slide-Up dari Bawah — Konsisten dengan Catalog) -->
                         <div class="catalog-quickview-overlay">
                             <a
                                 :href="'/katalog?search=' + encodeURIComponent(product.name)"
@@ -118,27 +105,14 @@
                             </span>
                         </div>
 
-                        <!-- Price & Rental Action Button -->
+                        <!-- Price Footer (/ 4 hari) -->
                         <div class="collection-product-footer">
                             <div class="catalog-price-container">
                                 <p class="collection-price">
                                     Rp {{ formatPrice(product.pricePerDay) }}
                                 </p>
-                                <span class="catalog-price-period">/hari</span>
+                                <span class="catalog-price-period">/ 4 hari</span>
                             </div>
-
-                            <a
-                                :href="'/katalog?search=' + encodeURIComponent(product.name)"
-                                :class="[
-                                    'collection-rent-button',
-                                    product.available
-                                        ? 'collection-rent-available'
-                                        : 'collection-rent-unavailable'
-                                ]"
-                                :aria-disabled="!product.available"
-                            >
-                                {{ product.available ? 'Sewa' : 'Habis' }}
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -149,7 +123,36 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
+
+const props = defineProps({
+    user: {
+        type: Object,
+        default: null,
+    },
+});
+
+const currentUser = ref(props.user);
+
+watch(
+    () => props.user,
+    (val) => {
+        currentUser.value = val;
+    }
+);
+
+onMounted(() => {
+    if (!currentUser.value && typeof document !== 'undefined') {
+        const appEl = document.getElementById('app');
+        if (appEl && appEl.dataset.user) {
+            try {
+                currentUser.value = JSON.parse(appEl.dataset.user);
+            } catch (e) {}
+        }
+    }
+});
+
+const isCustomer = computed(() => !!currentUser.value);
 
 const wishlist = ref(new Set());
 

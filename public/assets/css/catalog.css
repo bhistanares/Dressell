@@ -1,426 +1,507 @@
 /* ==========================================================================
    Catalog Stylesheet (public/assets/css/catalog.css)
    Khusus styling halaman Katalog Dressell (resources/views/customer/catalog.blade.php)
+   Konsep: Top Controls + Filter Drawer dari Kanan + Full-Width Product Grid
+   Dressell Editorial Fashion Aesthetic (Ivory, Warm White, Beige, Taupe, Charcoal)
    ========================================================================== */
+
+/* Prevent scrolling when drawer is open */
+body.drawer-open {
+    overflow: hidden !important;
+}
 
 /* Container Utama Halaman Katalog */
 .catalog-page {
-    background-color: #fafafa;
-    min-height: 80vh;
-    padding: 2rem 0 5rem;
+    background-color: #FAF7F2;
+    min-height: 85vh;
+    padding: 2.5rem 0 5rem;
 }
 
 .catalog-container {
-    max-width: 80rem;
+    max-width: 1440px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
 }
 
 @media (min-width: 640px) {
     .catalog-container {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-    }
-}
-
-@media (min-width: 768px) {
-    .catalog-container {
-        padding-left: 2rem;
-        padding-right: 2rem;
+        padding: 0 2rem;
     }
 }
 
 @media (min-width: 1024px) {
     .catalog-container {
-        padding-left: 3rem;
-        padding-right: 3rem;
+        padding: 0 2.5rem;
     }
 }
 
 /* ==========================================================================
-   Header Katalog
+   1. Header Katalog Editorial (Tanpa Label Atelier)
    ========================================================================== */
 .catalog-header {
-    margin-bottom: 1.75rem;
-}
-
-.catalog-header-main {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-@media (min-width: 768px) {
-    .catalog-header-main {
-        flex-direction: row;
-        align-items: flex-end;
-        justify-content: space-between;
-    }
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #E8E2D8;
 }
 
 .catalog-title {
-    margin: 0;
-    color: #111827;
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-    font-weight: 700;
-    letter-spacing: -0.025em;
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    margin: 0 0 0.5rem;
+    line-height: 1.15;
+}
+
+.catalog-title em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--taupe-dark);
 }
 
 .catalog-subtitle {
-    margin: 0.375rem 0 0;
-    color: #6b7280;
-    font-size: 0.9375rem;
-    line-height: 1.5rem;
-    max-width: 38rem;
-}
-
-.catalog-count-badge {
-    align-self: flex-start;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.375rem;
-    padding: 0.375rem 0.875rem;
-    background-color: #fff;
-    border: 1px solid #f3f4f6;
-    border-radius: 9999px;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: #4b5563;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-}
-
-.catalog-count-number {
-    font-weight: 700;
-    color: #e11d48;
+    font-family: var(--font-sans);
+    font-size: 0.925rem;
+    color: var(--taupe);
+    max-width: 660px;
+    line-height: 1.55;
+    margin: 0;
 }
 
 /* ==========================================================================
-   Controls Area: Filter, Sort, dan Filter Aktif
+   2. Top Controls Bar: Search Bar, Tombol Filter, Jumlah Produk, Pengurutan
    ========================================================================== */
-.catalog-controls {
-    background-color: #fff;
-    border: 1px solid #f3f4f6;
-    border-radius: 1rem;
-    padding: 1rem 1.25rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-/* Bar Kontrol Atas */
 .catalog-controls-bar {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    padding: 1rem 1.25rem;
+    background-color: #FFFFFF;
+    border: 1px solid #E8E2D8;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(38, 34, 31, 0.03);
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
     .catalog-controls-bar {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        padding: 0.85rem 1.5rem;
     }
 }
 
 .catalog-controls-left {
     display: flex;
     align-items: center;
-    gap: 0.875rem;
-    flex-wrap: wrap;
+    gap: 0.75rem;
+    flex: 1;
+    min-width: 0;
 }
 
 .catalog-controls-right {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    flex-wrap: wrap;
 }
 
-/* Tombol Buka/Tutup Filter */
-.catalog-filter-toggle-btn {
-    appearance: none;
+@media (min-width: 768px) {
+    .catalog-controls-right {
+        justify-content: flex-end;
+    }
+}
+
+/* Search Box */
+.catalog-search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 380px;
+    min-width: 200px;
+}
+
+.catalog-search-input {
+    width: 100%;
+    height: 40px;
+    padding: 0 2.25rem 0 2.5rem;
+    background-color: #FAF7F2;
+    border: 1px solid #D9CAB4;
+    border-radius: 9999px;
+    font-family: var(--font-sans);
+    font-size: 0.825rem;
+    color: var(--charcoal);
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.catalog-search-input:focus {
+    background-color: #FFFFFF;
+    border-color: var(--charcoal);
+    box-shadow: 0 0 0 2px rgba(38, 34, 31, 0.08);
+}
+
+.catalog-search-icon {
+    position: absolute;
+    left: 0.95rem;
+    width: 1rem;
+    height: 1rem;
+    color: var(--taupe);
+    pointer-events: none;
+}
+
+.catalog-search-clear-btn {
+    position: absolute;
+    right: 0.75rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    background: none;
+    color: var(--taupe);
+    font-size: 1.15rem;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.catalog-search-clear-btn:hover {
+    color: var(--charcoal);
+    background-color: rgba(38, 34, 31, 0.06);
+}
+
+/* Tombol Filter Drawer (Tampil di Desktop dan Mobile) */
+.catalog-filter-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background-color: #f9fafb;
-    border: 1px solid #e5e7eb;
+    height: 40px;
+    padding: 0 1.25rem;
+    background-color: var(--paper);
+    border: 1px solid #D9CAB4;
     border-radius: 9999px;
-    font-size: 0.8125rem;
+    font-family: var(--font-sans);
+    font-size: 0.825rem;
     font-weight: 600;
-    color: #374151;
+    color: var(--charcoal);
     cursor: pointer;
-    transition: all 0.15s ease;
-    user-select: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
-.catalog-filter-toggle-btn:hover {
-    background-color: #f3f4f6;
-    border-color: #d1d5db;
-    color: #111827;
+.catalog-filter-btn:hover {
+    background-color: #FFFFFF;
+    border-color: var(--charcoal);
+    color: var(--charcoal);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(38, 34, 31, 0.06);
 }
 
-.catalog-filter-toggle-btn.is-active,
-.catalog-filter-toggle-btn[aria-expanded="true"] {
-    background-color: #fff1f2;
-    border-color: #fda4af;
-    color: #e11d48;
+.catalog-filter-btn:active {
+    transform: translateY(0);
 }
 
-.catalog-filter-btn-icon {
-    width: 0.95rem;
-    height: 0.95rem;
-}
-
-.catalog-filter-chevron {
-    width: 0.875rem;
-    height: 0.875rem;
-    transition: transform 0.2s ease;
-}
-
-.catalog-filter-toggle-btn[aria-expanded="true"] .catalog-filter-chevron {
-    transform: rotate(180deg);
-}
-
-.catalog-filter-count-badge {
+.catalog-filter-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     min-width: 1.25rem;
     height: 1.25rem;
     padding: 0 0.35rem;
-    background-color: #e11d48;
-    color: #fff;
     border-radius: 9999px;
-    font-size: 0.6875rem;
+    background-color: var(--charcoal);
+    color: #FAF7F2;
+    font-size: 0.7rem;
     font-weight: 700;
-    line-height: 1;
 }
 
-.catalog-results-hint {
-    font-size: 0.8125rem;
-    color: #6b7280;
-    font-weight: 500;
+/* Informasi Jumlah Dress */
+.catalog-count-info {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--taupe);
+    white-space: nowrap;
 }
 
-/* Dropdown Urutkan */
+.catalog-count-info strong {
+    color: var(--charcoal);
+    font-weight: 600;
+}
+
+/* Dropdown Pengurutan */
 .catalog-sort-wrapper {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    width: 100%;
-}
-
-@media (min-width: 640px) {
-    .catalog-sort-wrapper {
-        width: auto;
-    }
+    white-space: nowrap;
 }
 
 .catalog-sort-label {
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: #4b5563;
-    white-space: nowrap;
+    font-size: 0.825rem;
+    font-weight: 500;
+    color: var(--taupe-dark);
 }
 
 .catalog-select-container {
     position: relative;
     display: inline-flex;
     align-items: center;
-    width: 100%;
-}
-
-@media (min-width: 640px) {
-    .catalog-select-container {
-        width: auto;
-    }
 }
 
 .catalog-sort-select {
     appearance: none;
-    -webkit-appearance: none;
-    padding: 0.45rem 2.25rem 0.45rem 0.875rem;
-    background-color: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.75rem;
-    font-size: 0.8125rem;
+    background-color: #FAF7F2;
+    border: 1px solid #D9CAB4;
+    border-radius: 9999px;
+    padding: 0.45rem 2.25rem 0.45rem 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.825rem;
     font-weight: 500;
-    color: #1f2937;
+    color: var(--charcoal);
     cursor: pointer;
-    transition: all 0.15s ease;
-    outline: none;
-    width: 100%;
-}
-
-@media (min-width: 640px) {
-    .catalog-sort-select {
-        width: auto;
-        min-width: 10.5rem;
-    }
+    transition: all 0.2s ease;
 }
 
 .catalog-sort-select:hover {
-    border-color: #d1d5db;
-    background-color: #f3f4f6;
+    border-color: var(--charcoal);
+    background-color: #FFFFFF;
 }
 
 .catalog-sort-select:focus {
-    border-color: #fda4af;
-    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.12);
-    background-color: #fff;
+    outline: none;
+    border-color: var(--charcoal);
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 2px rgba(38, 34, 31, 0.08);
 }
 
 .catalog-select-chevron {
     position: absolute;
-    right: 0.75rem;
-    width: 0.875rem;
-    height: 0.875rem;
-    color: #9ca3af;
+    right: 0.85rem;
+    width: 0.85rem;
+    height: 0.85rem;
+    color: var(--taupe);
     pointer-events: none;
 }
 
 /* ==========================================================================
-   Panel Filter & Filter Grid
+   3. Filter Drawer dari Sisi Kanan (Off-canvas)
    ========================================================================== */
-.catalog-filter-panel {
-    border-top: 1px solid #f3f4f6;
-    padding-top: 1.25rem;
-    animation: fadeInControls 0.2s ease-out;
+.catalog-drawer-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(38, 34, 31, 0.45);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    z-index: 1000;
+    transition: opacity 0.3s ease;
 }
 
-@keyframes fadeInControls {
-    from {
-        opacity: 0;
-        transform: translateY(-4px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.catalog-drawer-backdrop.is-open {
+    display: block;
 }
 
-.catalog-filter-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-}
-
-@media (min-width: 768px) {
-    .catalog-filter-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (min-width: 1024px) {
-    .catalog-filter-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-.catalog-filter-section {
+.catalog-filter-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 420px;
+    max-width: 90vw;
+    height: 100vh;
+    height: 100dvh;
+    background-color: #FFFFFF;
+    z-index: 1001;
     display: flex;
     flex-direction: column;
-    gap: 0.625rem;
-    padding: 0.875rem;
-    background-color: #fcfcfc;
-    border: 1px solid #f3f4f6;
-    border-radius: 0.75rem;
+    box-shadow: -10px 0 35px rgba(38, 34, 31, 0.16);
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.catalog-filter-drawer.is-open {
+    transform: translateX(0);
+}
+
+/* Drawer Header */
+.catalog-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #EFEAE2;
+    background-color: #FAF7F2;
+    flex-shrink: 0;
+}
+
+.catalog-drawer-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.catalog-drawer-title {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin: 0;
+}
+
+.catalog-drawer-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    padding: 0 0.35rem;
+    border-radius: 9999px;
+    background-color: var(--charcoal);
+    color: #FAF7F2;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+.catalog-drawer-close {
+    background: none;
+    border: none;
+    padding: 0.4rem;
+    color: var(--taupe);
+    cursor: pointer;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.catalog-drawer-close:hover {
+    color: var(--charcoal);
+    background-color: rgba(38, 34, 31, 0.06);
+}
+
+/* Drawer Scrollable Body */
+.catalog-drawer-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Filter Sections inside Drawer */
+.catalog-filter-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.35rem;
+    border-bottom: 1px solid #EFEAE2;
+}
+
+.catalog-filter-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .catalog-filter-section-header {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    gap: 0.5rem;
-    margin-bottom: 0.125rem;
+    margin-bottom: 0.85rem;
 }
 
 .catalog-filter-label {
-    font-size: 0.8125rem;
-    font-weight: 700;
-    color: #374151;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--charcoal);
 }
 
 .catalog-filter-sublabel {
-    font-size: 0.6875rem;
-    color: #9ca3af;
+    font-family: var(--font-sans);
+    font-size: 0.725rem;
+    color: var(--taupe);
 }
 
 .catalog-subfilter-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.375rem;
-    margin-top: 0.35rem;
+    margin-bottom: 0.95rem;
+}
+
+.catalog-subfilter-group:last-child {
+    margin-bottom: 0;
 }
 
 .catalog-subfilter-title {
     font-size: 0.75rem;
     font-weight: 600;
-    color: #6b7280;
+    color: var(--taupe-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.45rem;
+    display: block;
 }
 
+/* Pill Option Buttons */
 .catalog-filter-options {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.375rem;
-    align-items: center;
+    gap: 0.45rem;
 }
 
-/* Pill Buttons */
 .catalog-pill-btn {
-    appearance: none;
-    background-color: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 9999px;
-    padding: 0.3125rem 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: #4b5563;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    user-select: none;
     display: inline-flex;
     align-items: center;
-    gap: 0.375rem;
+    gap: 0.35rem;
+    padding: 0.4rem 0.85rem;
+    font-family: var(--font-sans);
+    font-size: 0.785rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    border: 1px solid #E0D7CB;
+    background-color: var(--paper);
+    color: var(--taupe-dark);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    text-decoration: none;
+    user-select: none;
 }
 
 .catalog-pill-btn:hover {
-    background-color: #f9fafb;
-    color: #111827;
-    border-color: #d1d5db;
+    background-color: #FFFFFF;
+    border-color: var(--charcoal);
+    color: var(--charcoal);
+    transform: translateY(-1px);
 }
 
 .catalog-pill-btn.active {
-    background-color: #fff1f2;
-    border-color: #fda4af;
-    color: #e11d48;
+    background-color: var(--charcoal);
+    border-color: var(--charcoal);
+    color: var(--paper);
     font-weight: 600;
-    box-shadow: 0 1px 2px rgba(225, 29, 72, 0.08);
+    box-shadow: 0 2px 6px rgba(38, 34, 31, 0.15);
 }
 
 .catalog-pill-size {
-    min-width: 2.25rem;
-    text-align: center;
+    min-width: 2.35rem;
     justify-content: center;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
 }
 
-/* Color Swatches / Dots */
+/* Swatches Warna */
 .catalog-color-dot {
-    width: 0.75rem;
-    height: 0.75rem;
-    border-radius: 9999px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
     display: inline-block;
     flex-shrink: 0;
 }
 
 .catalog-color-dot.has-border {
-    border: 1px solid #d1d5db;
+    border: 1px solid #D9CAB4;
 }
 
 /* Rentang Harga */
@@ -428,74 +509,111 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    flex-wrap: wrap;
 }
 
 .catalog-price-field {
     position: relative;
-    flex: 1;
-    min-width: 6.5rem;
     display: flex;
     align-items: center;
+    flex: 1;
 }
 
 .catalog-price-prefix {
     position: absolute;
-    left: 0.625rem;
-    font-size: 0.75rem;
-    color: #9ca3af;
+    left: 0.65rem;
+    font-size: 0.775rem;
     font-weight: 500;
+    color: var(--taupe);
     pointer-events: none;
 }
 
 .catalog-price-input {
     width: 100%;
-    padding: 0.375rem 0.5rem 0.375rem 1.85rem;
-    background-color: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.5rem;
-    font-size: 0.75rem;
-    color: #111827;
+    height: 38px;
+    padding: 0 0.5rem 0 2rem;
+    border: 1px solid #D9CAB4;
+    border-radius: 6px;
+    font-family: var(--font-sans);
+    font-size: 0.825rem;
+    background-color: var(--paper);
+    color: var(--charcoal);
     outline: none;
-    transition: all 0.15s ease;
-    box-sizing: border-box;
+    transition: all 0.2s ease;
 }
 
 .catalog-price-input:focus {
-    border-color: #fda4af;
-    box-shadow: 0 0 0 2px rgba(244, 63, 94, 0.12);
+    background-color: #FFFFFF;
+    border-color: var(--charcoal);
+    box-shadow: 0 0 0 2px rgba(38, 34, 31, 0.08);
 }
 
 .catalog-price-dash {
-    color: #9ca3af;
-    font-size: 0.75rem;
-}
-
-.catalog-price-apply-btn {
-    appearance: none;
-    background-color: #111827;
-    color: #fff;
-    border: none;
-    border-radius: 0.5rem;
-    padding: 0.375rem 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.15s ease;
-}
-
-.catalog-price-apply-btn:hover {
-    background-color: #374151;
+    color: var(--taupe);
+    font-size: 0.85rem;
 }
 
 .catalog-price-error {
-    font-size: 0.6875rem;
-    color: #e11d48;
-    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: #963A44;
+    margin-top: 0.45rem;
+    display: block;
+}
+
+/* Drawer Footer: Tombol Terapkan & Reset */
+.catalog-drawer-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #EFEAE2;
+    background-color: #FAF7F2;
+    flex-shrink: 0;
+}
+
+.catalog-drawer-reset-btn {
+    padding: 0.75rem 1.25rem;
+    background-color: #FFFFFF;
+    border: 1px solid #D9CAB4;
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--taupe-dark);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.catalog-drawer-reset-btn:hover {
+    background-color: #FBF2F2;
+    border-color: #963A44;
+    color: #963A44;
+}
+
+.catalog-drawer-apply-btn {
+    flex: 1;
+    padding: 0.75rem 1.25rem;
+    background-color: var(--charcoal);
+    color: #FAF7F2;
+    border: 1px solid var(--charcoal);
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.catalog-drawer-apply-btn:hover {
+    background-color: #3F3732;
+    border-color: #3F3732;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(38, 34, 31, 0.15);
 }
 
 /* ==========================================================================
-   Active Filters & Reset Bar
+   4. Active Filter Chips Bar
    ========================================================================== */
 .catalog-active-filters-bar {
     display: flex;
@@ -503,8 +621,11 @@
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
-    padding-top: 0.875rem;
-    border-top: 1px solid #f3f4f6;
+    margin-bottom: 1.75rem;
+    padding: 0.75rem 1.25rem;
+    background-color: #FFFFFF;
+    border: 1px solid #E8E2D8;
+    border-radius: 10px;
 }
 
 .catalog-chips-container {
@@ -512,216 +633,179 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 0.5rem;
+    flex: 1;
 }
 
 .catalog-chips-label {
     font-size: 0.75rem;
     font-weight: 600;
-    color: #6b7280;
+    color: var(--taupe);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 
 .catalog-chips-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.375rem;
     align-items: center;
+    gap: 0.4rem;
 }
 
 .catalog-chip {
     display: inline-flex;
     align-items: center;
-    gap: 0.375rem;
-    background-color: #fff1f2;
-    border: 1px solid #fecdd3;
-    color: #be123c;
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.2rem 0.5rem;
+    gap: 0.35rem;
+    padding: 0.3rem 0.75rem;
+    background-color: var(--paper);
+    border: 1px solid var(--beige);
     border-radius: 9999px;
-    line-height: 1.2;
+    font-size: 0.775rem;
+    color: var(--charcoal);
 }
 
 .catalog-chip-remove {
-    appearance: none;
     background: none;
     border: none;
-    color: #e11d48;
-    padding: 0;
+    color: var(--taupe);
     cursor: pointer;
-    font-size: 0.875rem;
+    font-size: 1.05rem;
     line-height: 1;
+    padding: 0;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     transition: color 0.15s ease;
 }
 
 .catalog-chip-remove:hover {
-    color: #9f1239;
+    color: #963A44;
 }
 
-.catalog-reset-btn {
+.catalog-reset-all-btn {
     background: none;
     border: none;
-    color: #e11d48;
+    font-family: var(--font-sans);
+    font-size: 0.775rem;
     font-weight: 600;
-    font-size: 0.8125rem;
+    color: #963A44;
     cursor: pointer;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.375rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    transition: all 0.15s ease;
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    transition: background-color 0.15s ease;
 }
 
-.catalog-reset-btn:hover {
-    background-color: #fff1f2;
+.catalog-reset-all-btn:hover {
+    background-color: #FBF2F2;
 }
 
 /* ==========================================================================
-   Product Card Modifications for Catalog
+   5. Product Grid (Konsisten 4 Kolom Desktop seperti Dashboard Customer)
    ========================================================================== */
-
-/* Card Container Overrides */
-.catalog-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #fff;
+.catalog-grid-section {
+    width: 100%;
 }
 
-/* Brand & Model Code in single line: "Nama Brand | Kode Dress" */
-.catalog-brand-code {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    overflow: hidden;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    color: #6b7280;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    max-width: 65%;
+.catalog-product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
 }
 
-.catalog-brand-name {
-    font-weight: 500;
-    color: #4b5563;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.catalog-brand-separator {
-    color: #d1d5db;
-    font-weight: 400;
-    flex-shrink: 0;
-}
-
-.catalog-model-code {
-    font-family: monospace;
-    color: #9ca3af;
-    flex-shrink: 0;
-}
-
-/* Wishlist Button in Catalog */
-.catalog-wishlist-btn {
-    position: absolute;
-    right: 0.625rem;
-    top: 0.625rem;
-    bottom: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    padding: 0;
-    border: none;
-    border-radius: 9999px;
-    background-color: rgba(255, 255, 255, 0.9);
-    color: #9ca3af;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-    backdrop-filter: blur(6px);
-    opacity: 0;
-    transform: translateY(-6px);
-    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-                transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-                background-color 0.2s ease,
-                color 0.2s ease;
-    z-index: 10;
-    pointer-events: none;
-}
-
-/* Muncul saat kartu di-hover atau difokuskan */
-.collection-card:hover .catalog-wishlist-btn,
-.collection-card:focus-within .catalog-wishlist-btn {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.catalog-wishlist-btn:hover {
-    background-color: #fff;
-    color: #f43f5e;
-    transform: scale(1.08);
-}
-
-.catalog-wishlist-btn.is-active {
-    color: #e11d48;
-    background-color: #fff;
-}
-
-.catalog-wishlist-btn.is-active svg {
-    fill: #e11d48;
-    stroke: #e11d48;
-}
-
-/* Touch Device Support: Tombol favorit dan quickview tetap dapat diakses tanpa hover */
-@media (hover: none) {
-    .catalog-wishlist-btn {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-        background-color: rgba(255, 255, 255, 0.85);
+@media (min-width: 640px) {
+    .catalog-product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
     }
 }
 
-/* Quick View / Lihat Detail Button Slide-up on Hover */
+@media (min-width: 768px) {
+    .catalog-product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+}
+
+/* Desktop: Tetap 4 kolom pada rentang ukuran desktop (mulai dari 960px ke atas, baik fullscreen maupun windowed) */
+@media (min-width: 960px) {
+    .catalog-product-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+/* Card Styling: Sesuai Format Baku Dashboard Customer (1rem rounded, EFEAE2 border) */
+.catalog-card {
+    background-color: #FFFFFF;
+    border: 1px solid #EFEAE2;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.catalog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px -6px rgba(38, 34, 31, 0.09);
+    border-color: #D9CAB4;
+}
+
+/* Card Image Area */
+.collection-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background-color: #F5EFEB;
+}
+
+.collection-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.catalog-card:hover .collection-image {
+    transform: scale(1.05);
+}
+
+/* Quick View Overlay (Muncul saat hover desktop) */
 .catalog-quickview-overlay {
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 0.75rem;
+    padding: 0.85rem;
     display: flex;
     justify-content: center;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.45) 0%, transparent 100%);
+    background: linear-gradient(to top, rgba(38, 34, 31, 0.65) 0%, transparent 100%);
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
     z-index: 5;
 }
 
-.collection-card:hover .catalog-quickview-overlay,
-.collection-card:focus-within .catalog-quickview-overlay {
+.catalog-card:hover .catalog-quickview-overlay,
+.catalog-card:focus-within .catalog-quickview-overlay {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
 }
 
+/* Tombol Lihat Detail: Identik dengan Dashboard Customer */
 .catalog-quickview-btn {
     width: 90%;
-    padding: 0.5rem 1rem;
-    background-color: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    padding: 0.45rem 0.875rem;
+    background-color: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.9);
     border-radius: 9999px;
-    font-size: 0.8125rem;
+    font-family: var(--font-sans);
+    font-size: 0.775rem;
     font-weight: 600;
-    color: #1f2937;
+    color: var(--charcoal);
     text-align: center;
     text-decoration: none;
     display: inline-flex;
@@ -731,103 +815,182 @@
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     transition: all 0.2s ease;
 }
 
 .catalog-quickview-btn:hover {
-    background-color: #e11d48;
-    color: #fff;
-    border-color: #e11d48;
+    background-color: var(--charcoal) !important;
+    color: #FFFFFF !important;
+    border-color: var(--charcoal) !important;
+    transform: translateY(-1px);
 }
 
-/* Touch Device Support for Detail Access */
-@media (hover: none) {
-    .catalog-quickview-overlay {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-        background: transparent;
-        padding: 0.5rem;
-    }
-
-    .catalog-quickview-btn {
-        background-color: rgba(255, 255, 255, 0.9);
-        font-size: 0.75rem;
-        padding: 0.375rem 0.75rem;
-    }
+/* Card Information Body */
+.collection-product-info {
+    padding: 1rem 1.15rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
-/* Tampilan Harga Ringkas Katalog */
+/* Baris Pertama: Kode di kiri, Kategori di kanan */
+.collection-product-meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.45rem;
+}
+
+.collection-model-code {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--taupe-dark);
+}
+
+.collection-category {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--taupe);
+}
+
+/* Baris Kedua: Nama Dress */
+.collection-product-name {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    line-height: 1.3;
+    margin: 0 0 0.6rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Baris Ketiga: Ukuran yang Tersedia */
+.collection-sizes {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.85rem;
+    margin-top: auto;
+}
+
+.collection-size-label {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    color: var(--taupe);
+    margin-right: 0.15rem;
+}
+
+.collection-size {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.5rem;
+    height: 1.35rem;
+    padding: 0 0.3rem;
+    border: 1px solid #E4D8C6;
+    border-radius: 4px;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--taupe-dark);
+    background-color: var(--paper);
+}
+
+/* Bagian Harga: Rp xxx / 4 hari */
+.collection-product-footer {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    padding-top: 0.65rem;
+    border-top: 1px solid #F0ECE4;
+}
+
 .catalog-price-container {
     display: flex;
     align-items: baseline;
-    gap: 0.25rem;
+    gap: 0.3rem;
+}
+
+.collection-price {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--charcoal);
 }
 
 .catalog-price-period {
-    color: #9ca3af;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    font-weight: 400;
+    color: var(--taupe);
+    font-size: 0.725rem;
+    font-weight: 500;
 }
 
 /* ==========================================================================
-   State Kosong (Empty States)
+   6. Empty State
    ========================================================================== */
 .catalog-empty-state {
     text-align: center;
-    padding: 4rem 1.5rem;
-    background-color: #fff;
-    border: 1px dashed #e5e7eb;
-    border-radius: 1.25rem;
-    margin: 2rem 0;
+    padding: 4.5rem 1.5rem;
+    background-color: #FFFFFF;
+    border: 1px dashed #D9CAB4;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 1.5rem 0;
 }
 
 .catalog-empty-icon {
-    width: 3.5rem;
-    height: 3.5rem;
-    color: #fda4af;
+    font-size: 2.75rem;
     margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff1f2;
-    border-radius: 9999px;
-    padding: 0.75rem;
+    color: var(--taupe);
 }
 
 .catalog-empty-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--charcoal);
     margin: 0 0 0.5rem;
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: #1f2937;
 }
 
 .catalog-empty-desc {
-    margin: 0 0 1.25rem;
-    font-size: 0.875rem;
-    color: #6b7280;
-    max-width: 24rem;
-    line-height: 1.4;
+    font-size: 0.9rem;
+    color: var(--taupe);
+    max-width: 440px;
+    margin: 0 0 1.5rem;
+    line-height: 1.55;
 }
 
-.catalog-empty-btn {
-    appearance: none;
-    background-color: #e11d48;
-    color: #fff;
-    border: none;
+.catalog-empty-reset-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--charcoal);
+    color: var(--paper);
     border-radius: 9999px;
-    padding: 0.5rem 1.25rem;
-    font-size: 0.8125rem;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 0.825rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
-.catalog-empty-btn:hover {
-    background-color: #be123c;
+.catalog-empty-reset-btn:hover {
+    background-color: #3F3732;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(38, 34, 31, 0.12);
 }

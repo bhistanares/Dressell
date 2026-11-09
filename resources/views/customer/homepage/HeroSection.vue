@@ -5,14 +5,9 @@
             <!-- Intro Header Section -->
             <div class="hero-intro">
                 <div>
-                    <span class="hero-eyebrow">Atelier Collection</span>
                     <h1 class="hero-title">
                         Temukan Dress untuk <em>Setiap Momen</em>
                     </h1>
-
-                    <p class="hero-subtitle">
-                        Sewa dress premium, mulai dari Rp 85.000/hari
-                    </p>
                 </div>
 
                 <a href="/katalog" class="hero-collection-link">

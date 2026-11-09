@@ -12,6 +12,10 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Registrasi Customer
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.process');
+
 // Kompatibilitas route lama /admin/login
 Route::get('/admin/login', function () {
     return redirect()->route('login');
@@ -28,6 +32,11 @@ Route::get('/admin/dashboard', function () {
 Route::get('/cashier/dashboard', function () {
     return view('cashier.dashboard');
 })->middleware('auth:admin')->name('cashier.dashboard');
+
+// Dashboard Customer
+Route::get('/customer/dashboard', function () {
+    return view('customer.accounts.dashboard');
+})->middleware('auth:web')->name('customer.dashboard');
 
 Route::get('/katalog', function () {
     return view('customer.catalog');
