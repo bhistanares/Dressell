@@ -7,10 +7,7 @@
         />
         <main>
             <Homepage v-if="page === 'home'" :user="user" />
-            <div v-else-if="page === 'customer-dashboard'" class="customer-dashboard">
-                <HeroSection />
-                <CollectionSection :user="user" />
-            </div>
+            <CustomerDashboard v-else-if="page === 'customer-dashboard'" :user="user" />
         </main>
         <TheFooter />
     </div>
@@ -20,8 +17,7 @@
 import { toRefs } from 'vue';
 import TheNavbar from '../views/components/TheNavbar.vue';
 import Homepage from '../views/customer/Homepage.vue';
-import HeroSection from '../views/customer/homepage/HeroSection.vue';
-import CollectionSection from '../views/customer/homepage/CollectionSection.vue';
+import CustomerDashboard from '../views/customer/CustomerDashboard.vue';
 import TheFooter from '../views/components/TheFooter.vue';
 
 const props = defineProps({

@@ -203,6 +203,26 @@
             <!-- Body Drawer Scrollable (Semua Kategori Filter Dipertahankan 100%) -->
             <div class="catalog-drawer-body">
 
+                <!-- Kelompok 0: Tanggal Acara (Muncul di Bagian Paling Atas Panel Filter) -->
+                <div class="catalog-filter-section catalog-filter-event-date-section">
+                    <div class="catalog-filter-section-header">
+                        <span class="catalog-filter-label">Tanggal Acara</span>
+                        <span class="catalog-filter-sublabel">(pemakaian gaun)</span>
+                    </div>
+                    <div class="catalog-date-input-wrapper">
+                        <input
+                            type="date"
+                            id="catalog-event-date-input"
+                            class="catalog-date-input"
+                            min="{{ date('Y-m-d') }}"
+                            onchange="onStagedEventDateChange(this.value)"
+                        />
+                        <p class="catalog-date-hint">
+                            Pilihan tanggal acara Anda. Gaun akan disiapkan sebelum tanggal acara yang ditentukan.
+                        </p>
+                    </div>
+                </div>
+
                 <!-- Kelompok 1: Kategori -->
                 <div class="catalog-filter-section">
                     <div class="catalog-filter-section-header">
@@ -272,7 +292,7 @@
                     </div>
                 </div>
 
-                <!-- Kelompok 6: Rentang Harga (per 4 hari) -->
+                <!-- Kelompok 6: Rentang Harga (per 2 hari) -->
                 <div class="catalog-filter-section">
                     <div class="catalog-filter-section-header">
                         <span class="catalog-filter-label">Rentang Harga</span>
@@ -418,15 +438,16 @@
             const currentCustomer = @json($userPayload);
 
             // Data katalog produk dress Dressell lengkap dengan metadata Brand, Tipe & Kebutuhan, Ukuran, Warna, dan Harga
-            // Menggunakan aset foto gaun nyata pada public/assets/img/dressell/
+            // Menggunakan 8 kategori utama resmi dan format kode dress standar Dressell (6 karakter alfanumerik)
             const allProducts = [
                 {
                     id: 1,
-                    modelCode: 'DRS-001',
+                    modelCode: 'EAU-001',
                     brand: 'Syaza Atelier',
-                    name: 'Gaun Pesta Elegan Mawar',
-                    category: 'Dress Pesta',
-                    events: ['Pesta', 'Ulang tahun'],
+                    name: 'Gaun Aurora',
+                    category: 'Elegant Gowns',
+                    categories: ['Elegant Gowns', 'Hijab-Friendly'],
+                    events: ['Pesta', 'Acara formal'],
                     style: 'Modern',
                     characteristics: ['Hijab-friendly'],
                     color: 'Rose',
@@ -440,10 +461,11 @@
                 },
                 {
                     id: 2,
-                    modelCode: 'KBY-012',
+                    modelCode: 'KSO-002',
                     brand: 'Arunika Kebaya',
-                    name: 'Kebaya Modern Songket',
-                    category: 'Kebaya Modern',
+                    name: 'Kebaya Songket',
+                    category: 'Modern Kebaya',
+                    categories: ['Modern Kebaya', 'Hijab-Friendly'],
                     events: ['Wisuda', 'Pernikahan', 'Acara formal'],
                     style: 'Tradisional',
                     characteristics: ['Hijab-friendly', 'Busui-friendly'],
@@ -458,10 +480,11 @@
                 },
                 {
                     id: 3,
-                    modelCode: 'GWN-003',
+                    modelCode: 'WCE-003',
                     brand: 'Syaza Atelier',
-                    name: 'Gaun Pengantin Aurora',
-                    category: 'Gaun Pernikahan',
+                    name: 'Gaun Celeste',
+                    category: 'Wedding Dress',
+                    categories: ['Wedding Dress'],
                     events: ['Pernikahan'],
                     style: 'Modern',
                     characteristics: ['Hijab-friendly'],
@@ -476,10 +499,11 @@
                 },
                 {
                     id: 4,
-                    modelCode: 'BTK-021',
+                    modelCode: 'PPA-004',
                     brand: 'Batik Danar',
-                    name: 'Midi Dress Batik Parang',
-                    category: 'Batik & Tenun',
+                    name: 'Batik Parang',
+                    category: 'Party Dress',
+                    categories: ['Party Dress'],
                     events: ['Acara formal', 'Wisuda'],
                     style: 'Tradisional',
                     characteristics: ['Busui-friendly'],
@@ -494,10 +518,11 @@
                 },
                 {
                     id: 5,
-                    modelCode: 'CSL-008',
+                    modelCode: 'MLI-005',
                     brand: 'Lumiere Studio',
-                    name: 'Dress Casual Linen Putih',
-                    category: 'Dress Casual',
+                    name: 'Satin Putih',
+                    category: 'Minimalist Suits',
+                    categories: ['Minimalist Suits'],
                     events: ['Acara kasual', 'Photoshoot'],
                     style: 'Minimalis',
                     characteristics: [],
@@ -512,10 +537,11 @@
                 },
                 {
                     id: 6,
-                    modelCode: 'MXD-015',
+                    modelCode: 'SFL-006',
                     brand: 'Glamour House',
-                    name: 'Maxi Dress Floral Garden',
-                    category: 'Maxi Dress',
+                    name: 'Flowy Garden',
+                    category: 'Special Moments',
+                    categories: ['Special Moments', 'Hijab-Friendly'],
                     events: ['Pesta', 'Photoshoot', 'Acara kasual'],
                     style: 'Korean style',
                     characteristics: ['Hijab-friendly'],
@@ -530,10 +556,11 @@
                 },
                 {
                     id: 7,
-                    modelCode: 'FRM-009',
+                    modelCode: 'EVE-007',
                     brand: 'Syaza Atelier',
-                    name: 'Gaun Formal Velvet Navy',
-                    category: 'Gaun Formal',
+                    name: 'Velvet Navy',
+                    category: 'Elegant Gowns',
+                    categories: ['Elegant Gowns', 'Hijab-Friendly'],
                     events: ['Acara formal', 'Pesta'],
                     style: 'Glamor',
                     characteristics: ['Hijab-friendly'],
@@ -548,10 +575,11 @@
                 },
                 {
                     id: 8,
-                    modelCode: 'DRS-017',
+                    modelCode: 'PSE-008',
                     brand: 'Glamour House',
-                    name: 'Dress Pesta Sequin Merah',
-                    category: 'Dress Pesta',
+                    name: 'Ruby Sequin',
+                    category: 'Party Dress',
+                    categories: ['Party Dress'],
                     events: ['Pesta', 'Ulang tahun'],
                     style: 'Korean style',
                     characteristics: [],
@@ -564,10 +592,57 @@
                     createdAt: '2026-10-25',
                     image: '/assets/img/dressell/drs-017.jpg',
                 },
+                {
+                    id: 9,
+                    modelCode: 'ICH-009',
+                    brand: 'Lumiere Studio',
+                    name: 'Silk Blossom',
+                    category: 'International Traditional',
+                    categories: ['International Traditional'],
+                    events: ['Photoshoot', 'Pesta'],
+                    style: 'Tradisional',
+                    characteristics: [],
+                    color: 'Merah',
+                    colorHex: '#dc2626',
+                    price: 195000,
+                    sizes: ['S', 'M', 'L'],
+                    available: true,
+                    rentalCount: 26,
+                    createdAt: '2026-10-20',
+                    image: '/assets/img/dressell/ed-batik.jpg',
+                },
+                {
+                    id: 10,
+                    modelCode: 'HPA-010',
+                    brand: 'Syaza Atelier',
+                    name: 'Satin Pashmina',
+                    category: 'Hijab-Friendly',
+                    categories: ['Hijab-Friendly', 'Elegant Gowns'],
+                    events: ['Acara formal', 'Wisuda', 'Pesta'],
+                    style: 'Modern',
+                    characteristics: ['Hijab-friendly'],
+                    color: 'Rose',
+                    colorHex: '#f43f5e',
+                    price: 175000,
+                    sizes: ['M', 'L', 'XL'],
+                    available: true,
+                    rentalCount: 38,
+                    createdAt: '2026-10-22',
+                    image: '/assets/img/dressell/ed-aurora.jpg',
+                },
             ];
 
-            // Master data pilihan filter (WAJIB DIPERTAHANKAN)
-            const availableCategories = ['Dress Pesta', 'Kebaya Modern', 'Gaun Pernikahan', 'Batik & Tenun', 'Dress Casual', 'Maxi Dress', 'Gaun Formal'];
+            // 8 Kategori Utama Dressell Resmi
+            const availableCategories = [
+                'Elegant Gowns',
+                'Modern Kebaya',
+                'Wedding Dress',
+                'Party Dress',
+                'Hijab-Friendly',
+                'Special Moments',
+                'Minimalist Suits',
+                'International Traditional'
+            ];
             const availableBrands = ['Syaza Atelier', 'Arunika Kebaya', 'Batik Danar', 'Lumiere Studio', 'Glamour House'];
             const availableEvents = ['Pesta', 'Pernikahan', 'Ulang tahun', 'Wisuda', 'Acara formal', 'Acara kasual'];
             const availableStyles = ['Korean style', 'Japanese style', 'Modern', 'Tradisional'];
@@ -587,6 +662,7 @@
             // State Filter Aktif (Applied State)
             // ==============================================================
             let searchQuery = '';
+            let currentEventDate = null;
             let currentCategory = 'all';
             let selectedBrands = new Set();
             let selectedEvents = new Set();
@@ -603,6 +679,7 @@
             // State Filter Sementara / Draft di Drawer (Staged State)
             // Pilihan sementara sebelum pengguna menekan 'Terapkan Filter'
             // ==============================================================
+            let stagedEventDate = null;
             let stagedCategory = 'all';
             let stagedBrands = new Set();
             let stagedEvents = new Set();
@@ -636,6 +713,7 @@
                 const btn = document.getElementById('catalog-filter-btn');
 
                 // Salin filter aktif saat ini ke dalam staged filter (pilihan sementara)
+                stagedEventDate = currentEventDate;
                 stagedCategory = currentCategory;
                 stagedBrands = new Set(selectedBrands);
                 stagedEvents = new Set(selectedEvents);
@@ -645,6 +723,10 @@
                 stagedColors = new Set(selectedColors);
                 stagedPriceMin = priceMin;
                 stagedPriceMax = priceMax;
+
+                // Sinkronkan input tanggal acara di dalam drawer
+                const dateInput = document.getElementById('catalog-event-date-input');
+                if (dateInput) dateInput.value = stagedEventDate || '';
 
                 // Sinkronkan input harga di dalam drawer
                 const minInput = document.getElementById('price-min-input');
@@ -682,9 +764,24 @@
                 }
             });
 
+            function onStagedEventDateChange(val) {
+                stagedEventDate = val ? val.trim() : null;
+                const stagedBadge = document.getElementById('drawer-staged-badge');
+                const count = getStagedFilterCount();
+                if (stagedBadge) {
+                    if (count > 0) {
+                        stagedBadge.textContent = count;
+                        stagedBadge.style.display = 'inline-flex';
+                    } else {
+                        stagedBadge.style.display = 'none';
+                    }
+                }
+            }
+
             // Menghitung jumlah filter aktif yang diterapkan
             function getActiveFilterCount() {
                 let count = 0;
+                if (currentEventDate) count++;
                 if (currentCategory !== 'all') count++;
                 count += selectedBrands.size;
                 count += selectedEvents.size;
@@ -699,6 +796,7 @@
             // Menghitung jumlah filter sementara di drawer
             function getStagedFilterCount() {
                 let count = 0;
+                if (stagedEventDate) count++;
                 if (stagedCategory !== 'all') count++;
                 count += stagedBrands.size;
                 count += stagedEvents.size;
@@ -884,6 +982,19 @@
                 stagedPriceMax = maxVal;
 
                 // Terapkan seluruh pilihan sementara ke filter aktif
+                currentEventDate = stagedEventDate;
+                if (currentEventDate) {
+                    try {
+                        sessionStorage.setItem('dressell_event_date', currentEventDate);
+                        localStorage.setItem('dressell_event_date', currentEventDate);
+                    } catch (e) {}
+                } else {
+                    try {
+                        sessionStorage.removeItem('dressell_event_date');
+                        localStorage.removeItem('dressell_event_date');
+                    } catch (e) {}
+                }
+
                 currentCategory = stagedCategory;
                 selectedBrands = new Set(stagedBrands);
                 selectedEvents = new Set(stagedEvents);
@@ -901,7 +1012,16 @@
             }
 
             function resetDrawerFilters() {
-                // Reset state sementara dan filter aktif sekaligus
+                // Reset state sementara dan filter aktif sekaligus termasuk tanggal acara
+                stagedEventDate = null;
+                currentEventDate = null;
+                try {
+                    sessionStorage.removeItem('dressell_event_date');
+                    localStorage.removeItem('dressell_event_date');
+                } catch (e) {}
+                const dateInput = document.getElementById('catalog-event-date-input');
+                if (dateInput) dateInput.value = '';
+
                 stagedCategory = 'all';
                 stagedBrands.clear();
                 stagedEvents.clear();
@@ -935,7 +1055,7 @@
                 renderCatalog();
             }
 
-            // Perbarui URL dengan parameter pencarian / kategori
+            // Perbarui URL dengan parameter pencarian / kategori / tanggal acara
             function updateUrlParams() {
                 const url = new URL(window.location.href);
                 if (searchQuery.trim()) {
@@ -948,6 +1068,12 @@
                     url.searchParams.set('kategori', currentCategory);
                 } else {
                     url.searchParams.delete('kategori');
+                }
+
+                if (currentEventDate) {
+                    url.searchParams.set('tanggal', currentEventDate);
+                } else {
+                    url.searchParams.delete('tanggal');
                 }
 
                 window.history.replaceState({}, '', url.toString());
@@ -987,6 +1113,16 @@
                         <span class="catalog-chip">
                             <span>Pencarian: "<strong>${escapeHtml(searchQuery.trim())}</strong>"</span>
                             <button type="button" class="catalog-chip-remove" onclick="clearSearch()" aria-label="Hapus pencarian">&times;</button>
+                        </span>
+                    `);
+                }
+
+                // Chip Tanggal Acara (Disimpan Antarhalaman)
+                if (currentEventDate) {
+                    chips.push(`
+                        <span class="catalog-chip">
+                            <span>Tanggal Acara: <strong>${formatDisplayDate(currentEventDate)}</strong></span>
+                            <button type="button" class="catalog-chip-remove" onclick="removeActiveEventDate()" aria-label="Hapus filter tanggal acara">&times;</button>
                         </span>
                     `);
                 }
@@ -1134,6 +1270,34 @@
                 renderCatalog();
             }
 
+            function removeActiveEventDate() {
+                currentEventDate = null;
+                stagedEventDate = null;
+                try {
+                    sessionStorage.removeItem('dressell_event_date');
+                    localStorage.removeItem('dressell_event_date');
+                } catch (e) {}
+                const dateInput = document.getElementById('catalog-event-date-input');
+                if (dateInput) dateInput.value = '';
+                updateUrlParams();
+                renderCatalog();
+            }
+
+            function formatDisplayDate(dateStr) {
+                if (!dateStr) return '';
+                try {
+                    const parts = dateStr.split('-');
+                    if (parts.length === 3) {
+                        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+                        const day = parseInt(parts[2], 10);
+                        const month = months[parseInt(parts[1], 10) - 1] || parts[1];
+                        const year = parts[0];
+                        return `${day} ${month} ${year}`;
+                    }
+                } catch (e) {}
+                return dateStr;
+            }
+
             // ==============================================================
             // Logika Penyaringan Produk (Berdasarkan Applied State)
             // ==============================================================
@@ -1156,9 +1320,12 @@
                         }
                     }
 
-                    // Filter Kategori
-                    if (currentCategory !== 'all' && item.category !== currentCategory) {
-                        return false;
+                    // Filter Kategori (Mendukung multi-kategori per gaun)
+                    if (currentCategory !== 'all') {
+                        const matchCat = (item.categories && item.categories.includes(currentCategory)) || item.category === currentCategory;
+                        if (!matchCat) {
+                            return false;
+                        }
                     }
 
                     // Filter Brand (Multi-pilih)
@@ -1328,7 +1495,7 @@
                                         <p class="collection-price">
                                             Rp ${formatPrice(product.price)}
                                         </p>
-                                        <span class="catalog-price-period">/ 4 hari</span>
+                                        <span class="catalog-price-period">/ 2 hari</span>
                                     </div>
                                 </div>
                             </div>
@@ -1398,9 +1565,18 @@
                 renderCatalog();
             }
 
-            // Reset Semua Filter & Pencarian
+            // Reset Semua Filter & Pencarian (Termasuk Tanggal Acara)
             function resetAllFilters() {
                 searchQuery = '';
+                currentEventDate = null;
+                stagedEventDate = null;
+                try {
+                    sessionStorage.removeItem('dressell_event_date');
+                    localStorage.removeItem('dressell_event_date');
+                } catch (e) {}
+                const dateInput = document.getElementById('catalog-event-date-input');
+                if (dateInput) dateInput.value = '';
+
                 currentCategory = 'all';
                 selectedBrands.clear();
                 selectedEvents.clear();
@@ -1443,6 +1619,7 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 const qParam = urlParams.get('search');
                 const catParam = urlParams.get('kategori');
+                const dateParam = urlParams.get('tanggal');
 
                 if (qParam) {
                     searchQuery = qParam;
@@ -1450,6 +1627,23 @@
                     const clearBtn = document.getElementById('catalog-search-clear');
                     if (searchInput) searchInput.value = qParam;
                     if (clearBtn) clearBtn.style.display = 'inline-flex';
+                }
+
+                // Inisialisasi Tanggal Acara: utamakan query param URL, fallback ke sessionStorage
+                if (dateParam) {
+                    currentEventDate = dateParam;
+                    try {
+                        sessionStorage.setItem('dressell_event_date', dateParam);
+                        localStorage.setItem('dressell_event_date', dateParam);
+                    } catch (e) {}
+                } else {
+                    try {
+                        const storedDate = sessionStorage.getItem('dressell_event_date') || localStorage.getItem('dressell_event_date');
+                        if (storedDate) {
+                            currentEventDate = storedDate;
+                            updateUrlParams();
+                        }
+                    } catch (e) {}
                 }
 
                 if (catParam && (availableCategories.includes(catParam) || catParam === 'all')) {

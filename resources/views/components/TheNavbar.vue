@@ -3,7 +3,7 @@
         <div class="navbar-container">
             <div class="navbar-main">
                 <!-- 1. Logo Dressell di Kiri -->
-                <a href="/" class="navbar-logo" aria-label="Dressell Beranda">
+                <a :href="currentUser ? '/customer/dashboard' : '/'" class="navbar-logo" aria-label="Dressell Beranda">
                     <img
                         :src="'/assets/img/logo-dressell.png'"
                         alt="Dressell Logo"
@@ -284,7 +284,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 
 const props = defineProps({
     user: {
@@ -386,10 +386,29 @@ onUnmounted(() => {
 
 const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
 
-const navItems = [
-    { label: 'Beranda', href: '/', active: currentPath === '/' },
-    { label: 'Katalog', href: '/katalog', active: currentPath.startsWith('/katalog') },
-    { label: 'Fitting Appointment', href: '#fitting', active: false },
-    { label: 'Cara Menyewa', href: '#cara-menyewa', active: false },
-];
+const navItems = computed(() => {
+    const isCust = !!currentUser.value;
+    return [
+        {
+            label: 'Beranda',
+            href: isCust ? '/customer/dashboard' : '/',
+            active: isCust ? (currentPath === '/customer/dashboard' || currentPath === '/') : currentPath === '/',
+        },
+        {
+            label: 'Katalog',
+            href: '/katalog',
+            active: currentPath.startsWith('/katalog'),
+        },
+        {
+            label: 'Fitting Appointment',
+            href: '#fitting',
+            active: false,
+        },
+        {
+            label: 'Cara Menyewa',
+            href: '#cara-menyewa',
+            active: false,
+        },
+    ];
+});
 </script>

@@ -6,7 +6,7 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Atelier Admin Dashboard — Dressell</title>
+    <title>Admin Dashboard — Dressell</title>
 
     <link rel="icon" type="image/png" href="{{ asset('assets/img/logo-dressell.png') }}">
 

@@ -1,41 +1,40 @@
 <template>
-    <header class="h-20 bg-[#FBF8F2] border-b border-[#E4D8C6] px-5 sm:px-8 flex items-center justify-between shrink-0 select-none z-20">
-        <!-- 1. Left: Mobile Toggle & Editorial Greeting -->
-        <div class="flex items-center gap-4">
+    <header class="h-16 bg-[#FBF8F2] border-b border-[#E4D8C6] shadow-[0_1px_4px_0_rgba(38,34,31,0.05)] px-5 sm:px-8 flex items-center justify-between shrink-0 select-none z-20">
+        <!-- 1. Left: Mobile Toggle & Page Title -->
+        <div class="flex items-center gap-3.5">
             <!-- Mobile Toggle Button (Hanya tampil di tablet/ponsel) -->
             <button
                 type="button"
                 @click="$emit('toggle-mobile-sidebar')"
-                class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-[#D9CAB4] text-[#26221F] bg-[#F4EFE6] hover:bg-[#E4D8C6] transition-colors cursor-pointer"
+                class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-lg border border-[#D9CAB4] text-[#26221F] bg-[#F4EFE6] hover:bg-[#E4D8C6] transition-colors cursor-pointer"
                 aria-label="Toggle Mobile Menu"
             >
-                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
             </button>
 
-            <!-- Greeting & Live Date -->
+            <!-- Page Title & Live Date -->
             <div>
-                <h1 class="font-serif text-xl sm:text-2xl font-medium tracking-tight text-[#26221F] leading-tight">
-                    Selamat datang, <em class="not-italic text-[#8A7B6C]">{{ adminName }}</em>
+                <h1 class="font-serif text-lg sm:text-xl font-medium tracking-tight text-[#26221F] leading-none">
+                    Dashboard
                 </h1>
-                <p class="text-xs text-[#8A7B6C] tracking-wider uppercase mt-0.5">
-                    {{ formattedDate }} &nbsp;·&nbsp;
-                    <span class="text-[#C2A878] font-medium">Fitting Studio Dressell</span>
+                <p class="text-[10.5px] text-[#8A7B6C] tracking-widest uppercase mt-1 leading-none">
+                    {{ formattedDate }}
                 </p>
             </div>
         </div>
 
-        <!-- 2. Right: Notification Bell & Admin Profile Dropdown / Actions -->
-        <div class="flex items-center gap-3 sm:gap-5">
-            <!-- Quick Link / Return to Store Preview -->
+        <!-- 2. Right: Actions & Admin Profile -->
+        <div class="flex items-center gap-2 sm:gap-3.5">
+            <!-- Quick Link: Lihat Toko -->
             <a
                 href="/"
                 target="_blank"
-                class="hidden lg:inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#6B5F53] hover:text-[#26221F] px-3 py-2 rounded-lg hover:bg-[#F4EFE6] transition-colors"
+                class="hidden lg:inline-flex items-center gap-1.5 text-[10.5px] font-semibold uppercase tracking-widest text-[#8A7B6C] hover:text-[#26221F] px-3 py-1.5 rounded-lg border border-transparent hover:border-[#E4D8C6] hover:bg-[#F4EFE6] transition-all"
                 title="Buka Website Customer di Tab Baru"
             >
-                <svg class="w-3.5 h-3.5 text-[#C2A878]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg class="w-3 h-3 text-[#C2A878]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                 </svg>
                 <span>Lihat Toko</span>
@@ -46,14 +45,14 @@
                 <button
                     type="button"
                     @click="isNotificationOpen = !isNotificationOpen"
-                    class="relative w-10 h-10 rounded-full border border-[#D9CAB4] bg-[#F4EFE6] text-[#6B5F53] hover:text-[#26221F] hover:bg-[#E4D8C6]/60 flex items-center justify-center transition-colors cursor-pointer"
+                    class="relative w-9 h-9 rounded-full border border-[#D9CAB4] bg-[#F4EFE6] text-[#6B5F53] hover:text-[#26221F] hover:bg-[#E4D8C6]/60 flex items-center justify-center transition-colors cursor-pointer"
                     aria-label="Notifikasi Studio"
                 >
                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                     </svg>
                     <!-- Unread notification pip -->
-                    <span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#C2A878] ring-2 ring-[#FBF8F2]"></span>
+                    <span class="absolute top-2 right-2 w-1.5 h-1.5 rounded-full bg-[#C2A878] ring-2 ring-[#FBF8F2]"></span>
                 </button>
 
                 <!-- Notifications Dropdown Panel -->
@@ -84,7 +83,7 @@
                             class="p-3.5 hover:bg-[#F4EFE6]/50 transition-colors cursor-pointer"
                         >
                             <div class="flex items-start gap-3">
-                                <span class="w-2 h-2 mt-1.5 rounded-full bg-[#C2A878] shrink-0"></span>
+                                <span class="w-1.5 h-1.5 mt-1.5 rounded-full bg-[#C2A878] shrink-0"></span>
                                 <div>
                                     <p class="text-xs font-medium text-[#26221F] leading-snug">
                                         {{ notif.title }}
@@ -103,21 +102,21 @@
             </div>
 
             <!-- Vertical Divider -->
-            <div class="h-6 w-px bg-[#E4D8C6]"></div>
+            <div class="h-5 w-px bg-[#E4D8C6]"></div>
 
             <!-- Admin Profile Area & Logout -->
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2.5">
                 <!-- Avatar & Role -->
                 <div class="flex items-center gap-2.5">
-                    <div class="w-9 h-9 rounded-full bg-[#26221F] text-[#FBF8F2] flex items-center justify-center font-serif text-sm font-medium border border-[#C2A878]/40 shadow-xs">
+                    <div class="w-8 h-8 rounded-full bg-[#26221F] text-[#FBF8F2] flex items-center justify-center font-serif text-xs font-medium border border-[#C2A878]/30 shadow-xs">
                         {{ adminInitials }}
                     </div>
                     <div class="hidden sm:block text-left">
                         <span class="block text-xs font-semibold text-[#26221F] leading-tight">
                             {{ adminName }}
                         </span>
-                        <span class="block text-[10px] uppercase tracking-wider text-[#8A7B6C]">
-                            {{ adminRole === 'admin' ? 'Master Admin' : 'Atelier Staff' }}
+                        <span class="block text-[10px] uppercase tracking-wider text-[#8A7B6C] leading-tight mt-0.5">
+                            {{ adminRole === 'admin' ? 'Master Admin' : 'Admin Dressell' }}
                         </span>
                     </div>
                 </div>
@@ -127,7 +126,7 @@
                     <input type="hidden" name="_token" :value="csrfToken" />
                     <button
                         type="submit"
-                        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#D9CAB4] text-[#6B5F53] hover:text-[#963A44] hover:border-[#963A44]/40 hover:bg-[#F4E7E3]/40 text-xs font-medium transition-colors cursor-pointer"
+                        class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[#D9CAB4] text-[#6B5F53] hover:text-[#963A44] hover:border-[#963A44]/40 hover:bg-[#F4E7E3]/40 text-xs font-medium transition-colors cursor-pointer"
                         title="Keluar dari sesi Admin"
                     >
                         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">

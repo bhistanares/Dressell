@@ -1,50 +1,73 @@
 <template>
-    <div class="space-y-8 pb-12">
-        <!-- 1. Hero Atelier Welcome Banner -->
-        <section class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#F4EFE6] via-[#FBF8F2] to-[#E4D8C6]/50 border border-[#E4D8C6] p-6 sm:p-8 shadow-xs">
-            <!-- Subtle Watermark Graphic in Background -->
-            <p class="absolute right-4 bottom-[-15px] font-serif italic text-7xl sm:text-9xl text-[#E4D8C6]/40 select-none pointer-events-none leading-none">
-                Atelier
-            </p>
+    <div class="space-y-10 pb-14">
 
-            <div class="relative z-10 max-w-2xl">
-                <span class="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#8A7B6C] mb-2">
-                    <span class="w-2 h-2 rounded-full bg-[#C2A878]"></span>
-                    Studio Operasional & Sewa Gaun
-                </span>
-                <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-[#26221F] leading-tight">
-                    Aktivitas & Layanan Fitting Hari Ini
-                </h2>
-                <p class="mt-2 text-sm text-[#6B5F53] leading-relaxed max-w-xl">
-                    Pantau sirkulasi gaun eksklusif Dressell, janji temu fitting pelanggan, dan verifikasi pesanan sewa yang sedang berjalan.
-                </p>
+        <!-- ═══════════════════════════════════════════════════════════════
+             SECTION 1 — EDITORIAL HERO / WELCOME HEADER
+             Pembuka dashboard: heading serif besar dengan aksen champagne
+             ═══════════════════════════════════════════════════════════════ -->
+        <section class="pb-8 border-b border-[#E4D8C6]">
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
 
-                <!-- Quick Operational Badges -->
-                <div class="mt-5 flex flex-wrap items-center gap-2.5 pt-2">
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FBF8F2] border border-[#D9CAB4] text-xs font-medium text-[#26221F]">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[#C2A878]"></span>
-                        <span>Fitting Studio Buka: 10:00 – 20:00 WIB</span>
-                    </div>
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FBF8F2] border border-[#D9CAB4] text-xs font-medium text-[#26221F]">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[#8A7B6C]"></span>
-                        <span>Fitting Room: 3 Bilik Siap Digunakan</span>
+                <!-- Left: Editorial Heading dengan Champagne Left Border -->
+                <div class="border-l-2 border-[#C2A878] pl-5">
+                    <span class="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#8A7B6C] block mb-3">
+                        Ringkasan Operasional
+                    </span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-medium tracking-tight text-[#26221F] leading-tight">
+                        Sirkulasi &amp;<br />Jadwal Fitting
+                    </h2>
+                    <!-- Editorial short rule + description -->
+                    <div class="mt-3.5 flex items-start gap-3">
+                        <div class="w-7 h-px bg-[#C2A878] mt-2.5 shrink-0"></div>
+                        <p class="text-sm text-[#6B5F53] leading-relaxed max-w-sm">
+                            Pantau penyewaan aktif, janji temu fitting, dan pesanan yang memerlukan tindak lanjut.
+                        </p>
                     </div>
                 </div>
+
+                <!-- Right: Stat Callouts Kompak -->
+                <div class="flex gap-6 sm:flex-col sm:gap-3 sm:text-right border-t sm:border-t-0 sm:border-l border-[#E4D8C6] pt-5 sm:pt-0 sm:pl-6 shrink-0">
+                    <div>
+                        <span class="font-serif text-2xl sm:text-3xl font-medium text-[#26221F] block leading-none">
+                            {{ stats.activeRentals }}
+                        </span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] text-[#8A7B6C] block mt-1.5">
+                            Aktif Disewa
+                        </span>
+                    </div>
+                    <div>
+                        <span class="font-serif text-2xl sm:text-3xl font-medium text-[#26221F] block leading-none">
+                            {{ stats.todayFittings }}
+                        </span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] text-[#8A7B6C] block mt-1.5">
+                            Fitting Hari Ini
+                        </span>
+                    </div>
+                </div>
+
             </div>
         </section>
 
-        <!-- 2. Operational Stat Cards Grid -->
+        <!-- ═══════════════════════════════════════════════════════════════
+             SECTION 2 — STAT CARDS (ASYMMETRIC GRID)
+             Card 1 (Penyewaan Aktif) = 2/5 lebar di desktop, full di tablet
+             Cards 2-4 = masing-masing 1/5 lebar di desktop
+             ═══════════════════════════════════════════════════════════════ -->
         <section aria-labelledby="stat-summary-heading">
-            <h3 id="stat-summary-heading" class="sr-only">Ringkasan Operasional</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-                <!-- Stat 1: Penyewaan Aktif -->
+            <h3 id="stat-summary-heading" class="sr-only">Ringkasan Statistik Operasional</h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
+
+                <!-- Stat 1: Penyewaan Aktif — Featured, col-span-2 di desktop & tablet -->
                 <StatCard
+                    class="sm:col-span-2 lg:col-span-2"
                     title="Penyewaan Aktif"
                     :value="stats.activeRentals"
                     unit="Gaun"
                     description="4 gaun dijadwalkan kembali hari ini"
                     badge="Sirkulasi"
                     variant="champagne"
+                    :featured="true"
                 >
                     <template #icon>
                         <svg class="w-4 h-4 text-[#C2A878]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -53,12 +76,12 @@
                     </template>
                 </StatCard>
 
-                <!-- Stat 2: Jadwal Fitting Hari Ini -->
+                <!-- Stat 2: Fitting Hari Ini -->
                 <StatCard
                     title="Fitting Hari Ini"
                     :value="stats.todayFittings"
                     unit="Sesi"
-                    description="2 sesi pagi · 4 sesi sore & malam"
+                    description="2 sesi pagi · 4 sesi sore &amp; malam"
                     badge="Appointment"
                     variant="taupe"
                 >
@@ -74,7 +97,7 @@
                     title="Perlu Konfirmasi"
                     :value="stats.pendingOrders"
                     unit="Pesanan"
-                    description="Verifikasi ukuran badan & bukti deposit"
+                    description="Verifikasi ukuran badan &amp; bukti deposit"
                     badge="Tindakan"
                     variant="blush"
                 >
@@ -85,8 +108,9 @@
                     </template>
                 </StatCard>
 
-                <!-- Stat 4: Dress Tersedia di Studio -->
+                <!-- Stat 4: Gaun Siap Sewa — Charcoal (inverted), full-width di tablet -->
                 <StatCard
+                    class="sm:col-span-2 lg:col-span-1"
                     title="Gaun Siap Sewa"
                     :value="stats.availableDresses"
                     unit="Gaun"
@@ -95,160 +119,203 @@
                     variant="charcoal"
                 >
                     <template #icon>
-                        <svg class="w-4 h-4 text-[#FBF8F2]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <svg class="w-4 h-4 text-[#C2A878]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </template>
                 </StatCard>
+
             </div>
         </section>
 
-        <!-- 3. Two-Column Activity Section (Fitting Schedule & Recent Rentals) -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <!-- Left: Jadwal Fitting Hari Ini (lg:col-span-5) -->
-            <section class="lg:col-span-5 bg-[#FBF8F2] border border-[#E4D8C6] rounded-2xl p-6 shadow-xs">
-                <div class="flex items-center justify-between pb-4 border-b border-[#E4D8C6]">
+        <!-- ═══════════════════════════════════════════════════════════════
+             SECTION 3 — TWO-COLUMN: FITTING TIMELINE + PENYEWAAN TERBARU
+             ═══════════════════════════════════════════════════════════════ -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+
+            <!-- ─────────────────────────────────────────────────────────
+                 LEFT: Jadwal Fitting Hari Ini (Timeline Editorial)
+                 ───────────────────────────────────────────────────────── -->
+            <section class="lg:col-span-5 bg-[#FBF8F2] border border-[#E4D8C6] rounded-2xl overflow-hidden shadow-xs">
+
+                <!-- Panel Header -->
+                <div class="px-6 pt-5 pb-4 border-b border-[#E4D8C6] flex items-center justify-between">
                     <div>
-                        <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#8A7B6C]">
+                        <span class="text-[9px] font-bold tracking-[0.3em] uppercase text-[#8A7B6C] block mb-0.5">
                             Jadwal Janji Temu
                         </span>
-                        <h3 class="font-serif text-xl font-medium text-[#26221F] mt-0.5">
+                        <h3 class="font-serif text-xl font-medium text-[#26221F]">
                             Fitting Hari Ini
                         </h3>
                     </div>
-                    <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#C2A878]/15 text-[#8A7B6C] border border-[#C2A878]/30">
+                    <span class="text-xs font-semibold px-3 py-1 rounded-full bg-[#F4EFE6] text-[#8A7B6C] border border-[#E4D8C6]">
                         {{ todayFittings.length }} Pelanggan
                     </span>
                 </div>
 
-                <!-- Timeline / Fitting Cards -->
-                <div class="mt-4 space-y-3.5">
+                <!-- Timeline Items -->
+                <div class="divide-y divide-[#E4D8C6]/50">
                     <div
                         v-for="fitting in todayFittings"
                         :key="fitting.id"
-                        class="p-4 rounded-xl border border-[#E4D8C6]/80 bg-[#F4EFE6]/40 hover:bg-[#F4EFE6] transition-colors"
+                        class="px-6 py-4 hover:bg-[#F4EFE6]/30 transition-colors"
                     >
-                        <div class="flex items-start justify-between gap-3">
-                            <!-- Time Slot Pill -->
-                            <div class="flex items-center gap-2">
-                                <span class="font-mono text-xs font-semibold text-[#26221F] bg-[#FBF8F2] px-2.5 py-1 rounded-md border border-[#D9CAB4]">
+                        <div class="flex items-start gap-4">
+                            <!-- Time (visual anchor) -->
+                            <div class="shrink-0 w-11 pt-0.5">
+                                <span class="font-mono text-sm font-bold text-[#26221F] block leading-none">
                                     {{ fitting.time }}
                                 </span>
-                                <span class="text-xs text-[#8A7B6C]">
-                                    {{ fitting.room }}
+                                <span class="text-[8.5px] text-[#A89B8D] uppercase tracking-wide block mt-1">
+                                    WIB
                                 </span>
                             </div>
 
-                            <!-- Status Badge -->
-                            <span
-                                :class="[
-                                    'text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-full border',
-                                    getFittingStatusClass(fitting.status)
-                                ]"
-                            >
-                                {{ fitting.statusLabel }}
-                            </span>
-                        </div>
+                            <!-- Status Dot -->
+                            <div class="shrink-0 mt-1">
+                                <div
+                                    :class="[
+                                        'w-2 h-2 rounded-full border-2',
+                                        fitting.status === 'ongoing'
+                                            ? 'bg-[#C2A878] border-[#C2A878]'
+                                            : fitting.status === 'confirmed'
+                                                ? 'bg-[#26221F] border-[#26221F]'
+                                                : fitting.status === 'pending'
+                                                    ? 'bg-[#F7EFEF] border-[#D48B96]'
+                                                    : 'bg-[#E4D8C6] border-[#D9CAB4]'
+                                    ]"
+                                ></div>
+                            </div>
 
-                        <!-- Customer & Target Dress Details -->
-                        <div class="mt-3">
-                            <h4 class="text-sm font-semibold text-[#26221F]">
-                                {{ fitting.customerName }}
-                            </h4>
-                            <p class="text-xs text-[#6B5F53] mt-0.5 flex items-center gap-1.5">
-                                <span class="text-[#C2A878]">●</span>
-                                <span>Gaun: {{ fitting.dressName }}</span>
-                            </p>
-                        </div>
-
-                        <!-- Notes / Tailor Assignment -->
-                        <div class="mt-2 pt-2 border-t border-[#E4D8C6]/60 flex items-center justify-between text-[11px] text-[#8A7B6C]">
-                            <span>Fitting Stylist: <strong>{{ fitting.stylist }}</strong></span>
-                            <span v-if="fitting.notes" class="italic truncate max-w-[140px]">{{ fitting.notes }}</span>
+                            <!-- Customer Info -->
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-start justify-between gap-2">
+                                    <div class="min-w-0">
+                                        <h4 class="text-sm font-semibold text-[#26221F] leading-tight truncate">
+                                            {{ fitting.customerName }}
+                                        </h4>
+                                        <p class="text-xs text-[#6B5F53] mt-0.5 truncate">
+                                            {{ fitting.dressName }}
+                                        </p>
+                                    </div>
+                                    <!-- Status Badge -->
+                                    <span
+                                        :class="[
+                                            'shrink-0 text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-full border',
+                                            getFittingStatusClass(fitting.status)
+                                        ]"
+                                    >
+                                        {{ fitting.statusLabel }}
+                                    </span>
+                                </div>
+                                <!-- Secondary info: room, stylist, notes -->
+                                <div class="mt-2 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[10px] text-[#8A7B6C]">
+                                    <span>{{ fitting.room }}</span>
+                                    <span class="text-[#D9CAB4]">&middot;</span>
+                                    <span>{{ fitting.stylist }}</span>
+                                    <template v-if="fitting.notes">
+                                        <span class="text-[#D9CAB4]">&middot;</span>
+                                        <span class="italic truncate max-w-[130px]">{{ fitting.notes }}</span>
+                                    </template>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </section>
 
-            <!-- Right: Daftar Penyewaan Terbaru (lg:col-span-7) -->
-            <section class="lg:col-span-7 bg-[#FBF8F2] border border-[#E4D8C6] rounded-2xl p-6 shadow-xs">
-                <div class="flex items-center justify-between pb-4 border-b border-[#E4D8C6]">
+            <!-- ─────────────────────────────────────────────────────────
+                 RIGHT: Penyewaan Terbaru (Sirkulasi Dress)
+                 ───────────────────────────────────────────────────────── -->
+            <section class="lg:col-span-7 bg-[#FBF8F2] border border-[#E4D8C6] rounded-2xl overflow-hidden shadow-xs">
+
+                <!-- Panel Header -->
+                <div class="px-6 pt-5 pb-4 border-b border-[#E4D8C6] flex items-center justify-between">
                     <div>
-                        <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#8A7B6C]">
+                        <span class="text-[9px] font-bold tracking-[0.3em] uppercase text-[#8A7B6C] block mb-0.5">
                             Sirkulasi Gaun
                         </span>
-                        <h3 class="font-serif text-xl font-medium text-[#26221F] mt-0.5">
+                        <h3 class="font-serif text-xl font-medium text-[#26221F]">
                             Penyewaan Terbaru
                         </h3>
                     </div>
-                    <span class="text-xs text-[#8A7B6C]">
+                    <span class="text-xs text-[#8A7B6C] hidden sm:block">
                         Menampilkan transaksi terkini
                     </span>
                 </div>
 
                 <!-- Table Container -->
-                <div class="mt-4 overflow-x-auto">
+                <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs text-[#26221F]">
                         <thead>
-                            <tr class="border-b border-[#E4D8C6] text-[10px] uppercase tracking-[0.16em] text-[#8A7B6C]">
-                                <th class="pb-3 font-semibold">Kode & Pelanggan</th>
-                                <th class="pb-3 font-semibold">Gaun Sewa</th>
-                                <th class="pb-3 font-semibold">Jadwal Sewa</th>
-                                <th class="pb-3 font-semibold text-right">Status</th>
+                            <tr class="border-b border-[#E4D8C6] bg-[#F4EFE6]/40">
+                                <th class="px-6 py-3 text-[9px] font-bold uppercase tracking-[0.2em] text-[#8A7B6C]">
+                                    Kode &amp; Pelanggan
+                                </th>
+                                <th class="px-3 py-3 text-[9px] font-bold uppercase tracking-[0.2em] text-[#8A7B6C]">
+                                    Gaun Sewa
+                                </th>
+                                <th class="px-3 py-3 text-[9px] font-bold uppercase tracking-[0.2em] text-[#8A7B6C] hidden sm:table-cell">
+                                    Jadwal
+                                </th>
+                                <th class="px-6 py-3 text-[9px] font-bold uppercase tracking-[0.2em] text-[#8A7B6C] text-right">
+                                    Status
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-[#E4D8C6]/60">
                             <tr
                                 v-for="rental in recentRentals"
                                 :key="rental.id"
-                                class="hover:bg-[#F4EFE6]/50 transition-colors"
+                                class="hover:bg-[#F4EFE6]/40 transition-colors"
                             >
                                 <!-- Kode & Customer -->
-                                <td class="py-3.5 pr-3">
-                                    <span class="font-mono text-[11px] font-medium text-[#8A7B6C] block">
+                                <td class="px-6 py-4">
+                                    <span class="font-mono text-[10px] font-medium text-[#A89B8D] block leading-none mb-1">
                                         {{ rental.code }}
                                     </span>
-                                    <span class="font-medium text-[#26221F] block text-xs mt-0.5">
+                                    <span class="font-semibold text-[#26221F] block text-[13px] leading-tight">
                                         {{ rental.customerName }}
                                     </span>
                                 </td>
 
                                 <!-- Gaun -->
-                                <td class="py-3.5 pr-3">
-                                    <div class="flex items-center gap-2.5">
-                                        <div class="w-8 h-10 rounded overflow-hidden bg-[#D9CAB4] shrink-0 border border-[#E4D8C6]">
+                                <td class="px-3 py-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-11 rounded-lg overflow-hidden bg-[#D9CAB4] shrink-0 border border-[#E4D8C6]">
                                             <img
                                                 :src="rental.dressImage"
                                                 alt=""
                                                 class="w-full h-full object-cover object-center"
                                             />
                                         </div>
-                                        <div>
-                                            <span class="font-medium text-[#26221F] block leading-tight">
+                                        <div class="min-w-0">
+                                            <span class="font-medium text-[#26221F] block leading-tight text-[12px] line-clamp-2">
                                                 {{ rental.dressName }}
                                             </span>
                                             <span class="text-[10px] text-[#8A7B6C] block mt-0.5">
-                                                Size: {{ rental.size }}
+                                                Size {{ rental.size }}
                                             </span>
                                         </div>
                                     </div>
                                 </td>
 
-                                <!-- Tanggal Sewa -->
-                                <td class="py-3.5 pr-3">
-                                    <span class="text-xs block text-[#26221F]">
+                                <!-- Tanggal (hidden on mobile) -->
+                                <td class="px-3 py-4 hidden sm:table-cell">
+                                    <span class="text-[12px] text-[#26221F] block leading-tight">
                                         {{ rental.dateRange }}
                                     </span>
                                     <span class="text-[10px] text-[#8A7B6C] block mt-0.5">
-                                        Durasi: {{ rental.duration }}
+                                        {{ rental.duration }}
                                     </span>
                                 </td>
 
                                 <!-- Status Badge -->
-                                <td class="py-3.5 text-right">
+                                <td class="px-6 py-4 text-right">
                                     <span
                                         :class="[
-                                            'inline-block text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full border',
+                                            'inline-block text-[9.5px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full border whitespace-nowrap',
                                             getRentalStatusClass(rental.status)
                                         ]"
                                     >
@@ -259,71 +326,11 @@
                         </tbody>
                     </table>
                 </div>
+
             </section>
+
         </div>
 
-        <!-- 4. Curated Dress Collection Spotlight -->
-        <section class="bg-[#FBF8F2] border border-[#E4D8C6] rounded-2xl p-6 sm:p-8 shadow-xs">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-[#E4D8C6] gap-3">
-                <div>
-                    <span class="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#8A7B6C]">
-                        Inventaris Studio
-                    </span>
-                    <h3 class="font-serif text-2xl font-medium text-[#26221F] mt-0.5">
-                        Koleksi Gaun Pilihan
-                    </h3>
-                </div>
-                <p class="text-xs text-[#8A7B6C] max-w-sm sm:text-right">
-                    Koleksi gaun paling sering disewa dan dipersiapkan di studio fitting Dressell.
-                </p>
-            </div>
-
-            <!-- Dress Cards Grid -->
-            <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <article
-                    v-for="dress in curatedDresses"
-                    :key="dress.id"
-                    class="group rounded-xl border border-[#E4D8C6] bg-[#F4EFE6]/40 overflow-hidden hover:shadow-md hover:border-[#D9CAB4] transition-all duration-200 flex flex-col"
-                >
-                    <!-- Photo Frame (Aspect Editorial 4:5) -->
-                    <div class="relative aspect-[3/4] overflow-hidden bg-[#D9CAB4]">
-                        <img
-                            :src="dress.image"
-                            :alt="dress.name"
-                            class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <!-- Availability Tag -->
-                        <div class="absolute top-3 left-3">
-                            <span
-                                :class="[
-                                    'text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full border backdrop-blur-xs',
-                                    getDressStatusClass(dress.status)
-                                ]"
-                            >
-                                {{ dress.statusLabel }}
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Dress Info -->
-                    <div class="p-4 flex-1 flex flex-col justify-between">
-                        <div>
-                            <span class="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#8A7B6C]">
-                                {{ dress.category }}
-                            </span>
-                            <h4 class="font-serif text-lg font-medium text-[#26221F] mt-0.5 leading-snug group-hover:text-[#8A7B6C] transition-colors">
-                                {{ dress.name }}
-                            </h4>
-                        </div>
-
-                        <div class="mt-3 pt-3 border-t border-[#E4D8C6]/80 flex items-center justify-between text-xs">
-                            <span class="text-[#8A7B6C]">Ukuran: <strong>{{ dress.availableSizes.join(', ') }}</strong></span>
-                            <span class="font-serif font-medium text-[#26221F]">{{ dress.rentalRate }}</span>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
     </div>
 </template>
 
@@ -447,49 +454,7 @@ const recentRentals = reactive([
     },
 ]);
 
-// 4. Data Koleksi Gaun Pilihan
-const curatedDresses = reactive([
-    {
-        id: 1,
-        name: 'The Evening Edit — No. 01',
-        category: 'Evening Gown',
-        image: '/assets/img/login-photo.jpg',
-        availableSizes: ['XS', 'S', 'M'],
-        rentalRate: 'Rp 850.000 / 3 hari',
-        status: 'available',
-        statusLabel: 'Tersedia di Studio',
-    },
-    {
-        id: 2,
-        name: 'Veloutine Noir Silhouette',
-        category: 'Cocktail & Gala',
-        image: '/assets/img/img-2.jpeg',
-        availableSizes: ['S', 'M', 'L'],
-        rentalRate: 'Rp 650.000 / 3 hari',
-        status: 'rented',
-        statusLabel: 'Sedang Disewa',
-    },
-    {
-        id: 3,
-        name: 'Rosette Ivory Bridal Plate',
-        category: 'Bridal & Prewedding',
-        image: '/assets/img/login-photo.jpg',
-        availableSizes: ['S', 'M'],
-        rentalRate: 'Rp 1.200.000 / 3 hari',
-        status: 'reserved',
-        statusLabel: 'Reserved Fitting',
-    },
-    {
-        id: 4,
-        name: 'Celeste Silk Atelier Gown',
-        category: 'Minimalist Couture',
-        image: '/assets/img/img-2.jpeg',
-        availableSizes: ['XS', 'S'],
-        rentalRate: 'Rp 950.000 / 3 hari',
-        status: 'available',
-        statusLabel: 'Tersedia di Studio',
-    },
-]);
+// 4. Data Koleksi Gaun Pilihan — dihapus sesuai keputusan desain (tidak ada fungsi Admin nyata, semua dummy)
 
 // Helper Style Status Fitting
 function getFittingStatusClass(status) {
@@ -518,20 +483,6 @@ function getRentalStatusClass(status) {
             return 'bg-[#E4D8C6]/40 text-[#6B5F53] border-[#D9CAB4]';
         default:
             return 'bg-[#FBF8F2] text-[#26221F] border-[#E4D8C6]';
-    }
-}
-
-// Helper Style Status Ketersediaan Dress
-function getDressStatusClass(status) {
-    switch (status) {
-        case 'available':
-            return 'bg-[#FBF8F2]/90 text-[#26221F] border-[#D9CAB4]';
-        case 'rented':
-            return 'bg-[#26221F]/90 text-[#FBF8F2] border-[#26221F]';
-        case 'reserved':
-            return 'bg-[#C2A878]/90 text-[#26221F] border-[#C2A878]';
-        default:
-            return 'bg-[#FBF8F2]/90 text-[#6B5F53] border-[#E4D8C6]';
     }
 }
 </script>

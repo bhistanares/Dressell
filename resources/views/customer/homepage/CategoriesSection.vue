@@ -1,13 +1,13 @@
 <template>
-    <!-- Featured Collection Section (Pilihan Editor) -->
-    <section class="featured-section" id="pilihan-editor">
+    <!-- Featured Collection Section (Pilihan Editor / Koleksi Tren & Populer) -->
+    <section class="featured-section" id="koleksi-tren">
         <div class="featured-container">
 
             <!-- Section Header -->
             <div class="featured-header">
                 <div>
-                    <span class="featured-eyebrow">Pilihan Editor</span>
-                    <h2 class="featured-title">Koleksi yang Sedang Tren</h2>
+                    <span class="featured-eyebrow">{{ eyebrow }}</span>
+                    <h2 class="featured-title">{{ title }}</h2>
                 </div>
 
                 <a href="/katalog" class="featured-all-link">
@@ -45,7 +45,7 @@
                         </h3>
 
                         <p class="featured-category featured-category-main">
-                            {{ featuredItems[0].category }}
+                            <span class="featured-code">{{ featuredItems[0].modelCode }}</span> &bull; {{ featuredItems[0].category }}
                         </p>
                     </div>
                 </a>
@@ -76,7 +76,7 @@
                             </h3>
 
                             <p class="featured-category featured-category-small">
-                                {{ item.category }}
+                                <span class="featured-code">{{ item.modelCode }}</span> &bull; {{ item.category }}
                             </p>
                         </div>
                     </a>
@@ -88,34 +88,49 @@
 </template>
 
 <script setup>
-// Koleksi pilihan editor dengan kurasi gaun terbaik Dressell
+defineProps({
+    title: {
+        type: String,
+        default: 'Koleksi yang Sedang Tren',
+    },
+    eyebrow: {
+        type: String,
+        default: 'Pilihan Editor',
+    },
+});
+
+// Koleksi pilihan editorial dengan kode dress dummy konsisten dan 8 kategori resmi
 const featuredItems = [
     {
         id: 1,
-        name: 'Gaun Pengantin Aurora',
-        category: 'Gaun Pernikahan',
+        modelCode: 'WCE-003',
+        name: 'Gaun Celeste',
+        category: 'Wedding Dress',
         tag: 'Paling Diminati',
         image: '/assets/img/dressell/ed-aurora.jpg',
     },
     {
         id: 2,
-        name: 'Kebaya Songket Merah',
-        category: 'Kebaya Modern',
-        tag: null,
+        modelCode: 'KSO-002',
+        name: 'Kebaya Songket',
+        category: 'Modern Kebaya',
+        tag: 'Koleksi Unggulan',
         image: '/assets/img/dressell/ed-kebaya.jpg',
     },
     {
         id: 3,
-        name: 'Midi Dress Batik Parang',
-        category: 'Batik & Tenun',
-        tag: null,
-        image: '/assets/img/dressell/ed-batik.jpg',
+        modelCode: 'EVE-007',
+        name: 'Velvet Navy',
+        category: 'Elegant Gowns',
+        tag: 'Gaun Malam',
+        image: '/assets/img/dressell/frm-009.jpg',
     },
     {
         id: 4,
-        name: 'Maxi Dress Floral',
-        category: 'Maxi Dress',
-        tag: null,
+        modelCode: 'SFL-006',
+        name: 'Flowy Garden',
+        category: 'Special Moments',
+        tag: 'Gaun Studio',
         image: '/assets/img/dressell/mxd-015.jpg',
     },
 ];

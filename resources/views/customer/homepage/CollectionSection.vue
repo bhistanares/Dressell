@@ -1,13 +1,13 @@
 <template>
-    <!-- Collection Section (Koleksi Dress Terpopuler) -->
+    <!-- Collection Section (Koleksi Dress) -->
     <section class="collection-section" id="koleksi">
         <div class="collection-container">
 
             <!-- Section Header -->
             <div class="collection-header">
                 <div>
-                    <span class="collection-eyebrow">Pilihan Terbaik</span>
-                    <h2 class="collection-title">Koleksi Dress Terpopuler</h2>
+                    <span class="collection-eyebrow">{{ eyebrow }}</span>
+                    <h2 class="collection-title">{{ title }}</h2>
                 </div>
 
                 <a href="/katalog" class="collection-all-link">
@@ -18,14 +18,14 @@
                 </a>
             </div>
 
-            <!-- Products Grid (8 Koleksi Populer) -->
+            <!-- Products Grid (8 Koleksi Dress Pilihan) -->
             <div class="collection-grid">
                 <div
                     v-for="product in products"
                     :key="product.id"
                     class="collection-card catalog-card"
                 >
-                    <!-- Image Container (Konsisten dengan pendekatan visual halaman Catalog) -->
+                    <!-- Image Container -->
                     <div class="collection-image-wrapper">
                         <img
                             :src="product.image"
@@ -34,7 +34,7 @@
                             loading="lazy"
                         />
 
-                        <!-- Badge Koleksi (Top Left) -->
+                        <!-- Badge Koleksi (Top Left - Hanya jika ada penanda) -->
                         <div v-if="product.badge" class="collection-badge-wrapper">
                             <span
                                 :class="[
@@ -48,7 +48,7 @@
                             </span>
                         </div>
 
-                        <!-- Wishlist Button (Hanya Ditampilkan Saat Hover untuk Customer Login) -->
+                        <!-- Wishlist Button (Hanya Ditampilkan Saat Hover untuk Customer yang Login) -->
                         <button
                             v-if="isCustomer"
                             type="button"
@@ -80,12 +80,12 @@
                         </div>
                     </div>
 
-                    <!-- Product Information -->
+                    <!-- Product Information: Kode, Kategori, Nama, Harga per 2 hari (Tanpa Ukuran & Tanpa Ketersediaan) -->
                     <div class="collection-product-info">
                         <!-- Model Code & Category Meta -->
                         <div class="collection-product-meta">
                             <span class="collection-model-code">{{ product.modelCode }}</span>
-                            <span class="collection-category">{{ product.category }}</span>
+                            <span class="collection-category">{{ product.category.toUpperCase() }}</span>
                         </div>
 
                         <!-- Dress Name -->
@@ -93,25 +93,13 @@
                             {{ product.name }}
                         </h3>
 
-                        <!-- Available Sizes -->
-                        <div class="collection-sizes">
-                            <span class="collection-size-label">Ukuran:</span>
-                            <span
-                                v-for="size in product.sizes"
-                                :key="size"
-                                class="collection-size"
-                            >
-                                {{ size }}
-                            </span>
-                        </div>
-
-                        <!-- Price Footer (/ 4 hari) -->
+                        <!-- Price Footer (/ 2 hari) -->
                         <div class="collection-product-footer">
                             <div class="catalog-price-container">
                                 <p class="collection-price">
                                     Rp {{ formatPrice(product.pricePerDay) }}
                                 </p>
-                                <span class="catalog-price-period">/ 4 hari</span>
+                                <span class="catalog-price-period">/ 2 hari</span>
                             </div>
                         </div>
                     </div>
@@ -129,6 +117,14 @@ const props = defineProps({
     user: {
         type: Object,
         default: null,
+    },
+    title: {
+        type: String,
+        default: 'Koleksi Dress Terpopuler',
+    },
+    eyebrow: {
+        type: String,
+        default: 'Pilihan Terbaik',
     },
 });
 
@@ -170,93 +166,77 @@ const formatPrice = (price) => {
     return new Intl.NumberFormat('id-ID').format(price);
 };
 
-// Data master 8 gaun terpopuler Dressell dengan aset foto studio yang tersedia
+// Data dummy 8 koleksi dress dengan kode dress standar 6 karakter dan 8 kategori resmi
 const products = [
     {
         id: 1,
-        modelCode: 'DRS-001',
-        name: 'Gaun Pesta Elegan Mawar',
-        category: 'Dress Pesta',
+        modelCode: 'EAU-001',
+        name: 'Gaun Aurora',
+        category: 'Elegant Gowns',
         pricePerDay: 150000,
-        sizes: ['S', 'M', 'L'],
-        available: true,
         badge: 'Terlaris',
         image: '/assets/img/dressell/drs-001.jpg',
     },
     {
         id: 2,
-        modelCode: 'KBY-012',
-        name: 'Kebaya Modern Songket',
-        category: 'Kebaya Modern',
+        modelCode: 'KSO-002',
+        name: 'Kebaya Songket',
+        category: 'Modern Kebaya',
         pricePerDay: 200000,
-        sizes: ['M', 'L', 'XL'],
-        available: true,
         badge: null,
         image: '/assets/img/dressell/kby-012.jpg',
     },
     {
         id: 3,
-        modelCode: 'GWN-003',
-        name: 'Gaun Pengantin Aurora',
-        category: 'Gaun Pernikahan',
+        modelCode: 'WCE-003',
+        name: 'Gaun Celeste',
+        category: 'Wedding Dress',
         pricePerDay: 450000,
-        sizes: ['S', 'M'],
-        available: true,
         badge: 'Favorit',
         image: '/assets/img/dressell/gwn-003.jpg',
     },
     {
         id: 4,
-        modelCode: 'BTK-021',
-        name: 'Midi Dress Batik Parang',
-        category: 'Batik & Tenun',
+        modelCode: 'PPA-004',
+        name: 'Batik Parang',
+        category: 'Party Dress',
         pricePerDay: 120000,
-        sizes: ['S', 'M', 'L', 'XL'],
-        available: true,
         badge: null,
         image: '/assets/img/dressell/btk-021.jpg',
     },
     {
         id: 5,
-        modelCode: 'CSL-008',
-        name: 'Dress Casual Linen Putih',
-        category: 'Dress Casual',
+        modelCode: 'MLI-005',
+        name: 'Satin Putih',
+        category: 'Minimalist Suits',
         pricePerDay: 85000,
-        sizes: ['XS', 'S', 'M'],
-        available: true,
         badge: null,
         image: '/assets/img/dressell/csl-008.jpg',
     },
     {
         id: 6,
-        modelCode: 'MXD-015',
-        name: 'Maxi Dress Floral Garden',
-        category: 'Maxi Dress',
+        modelCode: 'SFL-006',
+        name: 'Flowy Garden',
+        category: 'Special Moments',
         pricePerDay: 110000,
-        sizes: ['M', 'L'],
-        available: true,
         badge: 'Terlaris',
         image: '/assets/img/dressell/mxd-015.jpg',
     },
     {
         id: 7,
-        modelCode: 'FRM-009',
-        name: 'Gaun Formal Velvet Navy',
-        category: 'Gaun Formal',
+        modelCode: 'EVE-007',
+        name: 'Velvet Navy',
+        category: 'Elegant Gowns',
         pricePerDay: 185000,
-        sizes: ['S', 'M', 'L'],
-        available: false,
         badge: null,
         image: '/assets/img/dressell/frm-009.jpg',
     },
     {
         id: 8,
-        modelCode: 'DRS-017',
-        name: 'Dress Pesta Sequin Merah',
-        category: 'Dress Pesta',
+        modelCode: 'PSE-008',
+        name: 'Ruby Sequin',
+        category: 'Party Dress',
         pricePerDay: 220000,
-        sizes: ['M', 'L'],
-        available: true,
         badge: null,
         image: '/assets/img/dressell/drs-017.jpg',
     },

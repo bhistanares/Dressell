@@ -5,22 +5,26 @@
             isCollapsed ? 'w-20' : 'w-64 lg:w-72'
         ]"
     >
-        <!-- 1. Brand & Atelier Identity -->
-        <div class="h-20 flex items-center px-5 border-b border-[#E4D8C6]/80 justify-between">
-            <div class="flex items-center gap-3 overflow-hidden">
-                <img
-                    :src="'/assets/img/logo-dressell.png'"
-                    alt="Dressell Logo"
-                    width="36"
-                    height="36"
-                    class="w-9 h-9 max-w-[36px] max-h-[36px] object-contain shrink-0"
-                />
-                <div v-show="!isCollapsed" class="transition-opacity duration-200">
-                    <span class="block font-serif text-2xl font-medium tracking-tight text-[#26221F] leading-none">
+        <!-- 1. Brand Identity -->
+        <div class="h-16 flex items-center px-4 border-b border-[#E4D8C6] justify-between gap-2 overflow-hidden">
+            <div class="flex items-center gap-3 overflow-hidden min-w-0">
+                <!-- Logo container with frame -->
+                <div class="shrink-0 w-9 h-9 rounded-lg bg-[#FBF8F2] border border-[#E4D8C6] shadow-sm flex items-center justify-center">
+                    <img
+                        :src="'/assets/img/logo-dressell.png'"
+                        alt="Dressell Logo"
+                        width="22"
+                        height="22"
+                        class="w-[22px] h-[22px] object-contain"
+                    />
+                </div>
+
+                <div v-show="!isCollapsed" class="overflow-hidden min-w-0">
+                    <span class="block font-serif text-[19px] font-medium tracking-tight text-[#26221F] leading-none whitespace-nowrap">
                         Dressell
                     </span>
-                    <span class="block text-[10px] uppercase tracking-[0.2em] text-[#8A7B6C] font-semibold mt-1">
-                        Atelier Studio
+                    <span class="block text-[8.5px] uppercase tracking-[0.32em] text-[#C2A878] font-semibold mt-1.5 leading-none whitespace-nowrap">
+                        Admin Panel
                     </span>
                 </div>
             </div>
@@ -29,12 +33,12 @@
             <button
                 type="button"
                 @click="$emit('toggle-collapse')"
-                class="hidden md:inline-flex items-center justify-center w-8 h-8 rounded-full border border-[#D9CAB4] text-[#6B5F53] hover:text-[#26221F] hover:bg-[#E4D8C6]/60 transition-colors cursor-pointer"
+                class="hidden md:inline-flex shrink-0 items-center justify-center w-7 h-7 rounded-full border border-[#D9CAB4] text-[#8A7B6C] hover:text-[#26221F] hover:bg-[#E4D8C6]/60 transition-colors cursor-pointer"
                 :title="isCollapsed ? 'Perluas Sidebar' : 'Ciutkan Sidebar'"
                 aria-label="Toggle Sidebar"
             >
                 <svg
-                    :class="['w-4 h-4 transition-transform duration-300', isCollapsed ? 'rotate-180' : '']"
+                    :class="['w-3.5 h-3.5 transition-transform duration-300', isCollapsed ? 'rotate-180' : '']"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -46,33 +50,49 @@
         </div>
 
         <!-- 2. Navigation Area -->
-        <nav class="flex-1 py-6 px-3 space-y-1.5 overflow-y-auto">
-            <!-- Label Bagian Menu (Hanya Tampil Saat Expanded) -->
-            <div v-show="!isCollapsed" class="px-3 pb-2">
-                <p class="text-[10px] font-semibold tracking-[0.24em] text-[#8A7B6C] uppercase">
-                    Menu Utama
-                </p>
+        <nav class="flex-1 overflow-y-auto py-5">
+            <!-- Decorative Separator with Label -->
+            <div :class="['mb-3', isCollapsed ? 'px-4' : 'px-5']">
+                <div v-if="!isCollapsed" class="flex items-center gap-2.5">
+                    <span class="h-px flex-1 bg-[#E4D8C6]"></span>
+                    <span class="text-[8px] font-bold tracking-[0.38em] uppercase text-[#C2A878]">Menu</span>
+                    <span class="h-px flex-1 bg-[#E4D8C6]"></span>
+                </div>
+                <div v-else class="h-px bg-[#E4D8C6]"></div>
             </div>
 
-            <!-- Daftar Menu Dinamis (Tahap 1: Hanya Dashboard Aktif) -->
-            <ul class="space-y-1">
+            <!-- Menu Items -->
+            <ul :class="['space-y-0.5', isCollapsed ? 'px-2' : 'px-3']">
                 <li v-for="item in navigationItems" :key="item.id">
                     <button
                         type="button"
                         @click="handleMenuClick(item)"
                         :class="[
-                            'w-full flex items-center gap-3.5 px-3 py-3 rounded-lg text-left transition-all duration-200 group cursor-pointer',
+                            'w-full flex items-center gap-3 text-left transition-all duration-200 group cursor-pointer relative overflow-hidden',
+                            isCollapsed ? 'justify-center px-0 py-3 rounded-xl' : 'px-3 py-2.5 rounded-xl',
                             item.active
-                                ? 'bg-[#26221F] text-[#FBF8F2] shadow-sm'
-                                : 'text-[#6B5F53] hover:bg-[#E4D8C6]/50 hover:text-[#26221F]'
+                                ? 'bg-[#FBF8F2] shadow-sm'
+                                : 'hover:bg-[#E4D8C6]/30'
                         ]"
                         :title="isCollapsed ? item.label : ''"
                     >
-                        <!-- Icon -->
+                        <!-- Left Active Indicator Bar (expanded only) -->
+                        <span
+                            v-if="!isCollapsed"
+                            :class="[
+                                'absolute left-0 inset-y-2 w-[3px] rounded-r-full transition-all duration-300',
+                                item.active ? 'bg-[#C2A878]' : 'bg-transparent'
+                            ]"
+                        ></span>
+
+                        <!-- Icon Container -->
                         <span
                             :class="[
-                                'shrink-0 flex items-center justify-center w-6 h-6 transition-colors',
-                                item.active ? 'text-[#C2A878]' : 'text-[#8A7B6C] group-hover:text-[#26221F]'
+                                'shrink-0 flex items-center justify-center transition-colors duration-200',
+                                isCollapsed ? 'w-9 h-9 rounded-xl' : 'w-5 h-5',
+                                item.active
+                                    ? (isCollapsed ? 'bg-[#FBF8F2] text-[#C2A878] shadow-sm' : 'text-[#C2A878]')
+                                    : (isCollapsed ? 'text-[#8A7B6C] group-hover:bg-[#E4D8C6]/50 group-hover:text-[#26221F]' : 'text-[#8A7B6C] group-hover:text-[#26221F]')
                             ]"
                         >
                             <!-- Dashboard Icon -->
@@ -84,17 +104,21 @@
                             </svg>
                         </span>
 
-                        <!-- Label & Badge -->
-                        <div v-show="!isCollapsed" class="flex-1 flex items-center justify-between overflow-hidden">
-                            <span class="text-sm font-medium tracking-wide truncate">
+                        <!-- Label & Active Dot (expanded only) -->
+                        <div v-show="!isCollapsed" class="flex-1 flex items-center justify-between overflow-hidden min-w-0">
+                            <span
+                                :class="[
+                                    'text-sm tracking-wide truncate transition-colors duration-200',
+                                    item.active ? 'font-semibold text-[#26221F]' : 'font-medium text-[#6B5F53] group-hover:text-[#26221F]'
+                                ]"
+                            >
                                 {{ item.label }}
                             </span>
+                            <!-- Champagne dot: active indicator -->
                             <span
-                                v-if="item.badge"
-                                class="text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-full bg-[#C2A878]/20 text-[#C2A878] border border-[#C2A878]/30"
-                            >
-                                {{ item.badge }}
-                            </span>
+                                v-if="item.active"
+                                class="w-1.5 h-1.5 rounded-full bg-[#C2A878] shrink-0 ml-2"
+                            ></span>
                         </div>
                     </button>
                 </li>
@@ -103,33 +127,14 @@
             <!-- Catatan Pengembang: Struktur siap untuk menu lanjutan (Katalog, Penyewaan, Fitting, dsb.) -->
         </nav>
 
-        <!-- 3. Bottom Atelier Status Card -->
-        <div class="p-3 border-t border-[#E4D8C6]/80">
-            <div
-                v-if="!isCollapsed"
-                class="p-3.5 rounded-xl bg-[#FBF8F2] border border-[#E4D8C6] shadow-2xs space-y-2"
-            >
-                <div class="flex items-center gap-2">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C2A878] opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-[#C2A878]"></span>
-                    </span>
-                    <span class="text-[11px] font-semibold tracking-wider uppercase text-[#6B5F53]">
-                        Studio Aktif
-                    </span>
-                </div>
-                <p class="text-xs text-[#8A7B6C] leading-snug">
-                    Layanan sewa gaun & jadwal fitting appointment berjalan normal.
-                </p>
-            </div>
-
-            <!-- Tampilan Mini Saat Collapsed -->
-            <div v-else class="flex justify-center py-2" title="Studio Aktif">
-                <span class="relative flex h-2.5 w-2.5">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C2A878] opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#C2A878]"></span>
-                </span>
-            </div>
+        <!-- 3. Bottom Brand Footer (expanded only) -->
+        <div
+            v-show="!isCollapsed"
+            class="px-5 py-3.5 border-t border-[#E4D8C6]/60"
+        >
+            <span class="text-[9px] tracking-[0.22em] uppercase text-[#A89B8D] font-medium">
+                Dressell &middot; v1.0
+            </span>
         </div>
     </aside>
 </template>
